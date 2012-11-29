@@ -1,0 +1,10 @@
+# Eclipse
+.classpath
+.metadata/
+.project
+
+*.class
+
+# Package Files #
+*.war
+*.ear
