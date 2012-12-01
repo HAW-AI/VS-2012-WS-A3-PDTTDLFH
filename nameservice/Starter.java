@@ -9,6 +9,6 @@ public class Starter {
 			System.exit(0);
 		}
 		NameService nameService = new NameService(Integer.parseInt(args[0]));
-		nameService.run();
+		nameService.start();
 	}
 }
