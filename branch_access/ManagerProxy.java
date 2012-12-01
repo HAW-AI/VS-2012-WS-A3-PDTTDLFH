@@ -27,4 +27,8 @@ public class ManagerProxy extends Manager{
 	public void marshal(){
 		// TODO Auto-generated method stub
 	}
+	
+	public void unmarshal(){
+		// TODO Auto-generated method stub
+	}
 }

@@ -31,4 +31,8 @@ public class AccountProxy extends Account{
 	public void marshal(){
 		// TODO Auto-generated method stub
 	}
+	
+	public void unmarshal(){
+		// TODO Auto-generated method stub
+	}
 }

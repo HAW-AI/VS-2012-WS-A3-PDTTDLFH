@@ -8,11 +8,15 @@ public class ManagerSkeleton {
 		this.name = name;
 	}
 	
+	public String name() {
+		return name;
+	}
+	
 	public void marshal(){
 		// TODO Auto-generated method stub
 	}
 	
-	public String name() {
-		return name;
+	public void unmarshal(){
+		// TODO Auto-generated method stub
 	}
 }
