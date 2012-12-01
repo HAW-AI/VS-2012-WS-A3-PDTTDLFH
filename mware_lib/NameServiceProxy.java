@@ -1,25 +1,68 @@
 package mware_lib;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Arrays;
+
+import utillity.Utility;
 
 public class NameServiceProxy extends NameService {
 	
 	private final Socket socket;
-
+	private PrintWriter out;
+	private BufferedReader in;
+	
 	public NameServiceProxy(Socket socket) {
 		this.socket = socket;
+		try{
+			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			out = new PrintWriter(socket.getOutputStream(), true);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}	
 	}
 
 	@Override
 	public void rebind(Object servant, String name) {
-		// TODO Auto-generated method stub
-
+		String type = Utility.getOriginType(servant);
+		System.out.println(type);
+		String host = socket.getLocalAddress().getHostAddress();
+		String port = String.valueOf(Communicator.getPort()); //TODO
+		String msg =  Utility.concatStrWDel(",", "rebind", name, type, host, port);
+		out.println(msg);
+		String result = null;
+		System.out.println("sending rebind to ns: " + msg);
+		try {
+			result = in.readLine();
+			System.out.println("ns: " + result);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		if (result.equals("ok")) {
+			SkeletonCaretaker.addSkeleton(name, servant);
+		}
 	}
-
+	
 	@Override
 	public Object resolve(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		Object result = new Object();
+		System.out.println("resolving: " + name);
+		out.println("resolve," + name);
+		String[] answer = null;
+		try {
+			answer = in.readLine().split(",");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		if (answer[0].equals("result")) {
+			System.out.println("answer: "+Arrays.toString(answer));
+			ProxyCaretaker.create(answer[1], answer[2], answer[3], Integer.parseInt(answer[4]));
+		} else {
+			System.out.println("received unknown msg during rebind: "+Arrays.toString(answer));
+		}
+		return result;
 	}
-
 }
