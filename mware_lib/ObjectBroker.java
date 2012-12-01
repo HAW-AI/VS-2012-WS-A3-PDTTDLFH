@@ -29,5 +29,4 @@ public class ObjectBroker {
 		}
 		return new NameServiceProxy(socket);
 	}
-
 }
