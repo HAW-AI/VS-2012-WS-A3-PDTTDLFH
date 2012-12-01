@@ -49,11 +49,12 @@ public class NameServiceThread extends Thread{
 				} else {
 					error("unknown command: " + tokens[0]);
 				}
-				in.close();
-				out.close();
-				if (!socket.isClosed()) {
-					socket.close();
-				}
+			}
+			System.out.println("Request processed. Terminating thread");
+			in.close();
+			out.close();
+			if (!socket.isClosed()) {
+				socket.close();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -70,7 +71,7 @@ public class NameServiceThread extends Thread{
 		} else if (port < 0 || port > 65535) {
 			error("rebind: port must be an integer and 0<=port<=65535");
 		} else {
-			System.out.println("Request: rebind");
+			System.out.println("Request: rebind >"+name+" "+type+" "+host+" "+port);
 			nameService.addObject(name, new ObjectData(name, type, host, port));
 			out.println("ok");
 		}
