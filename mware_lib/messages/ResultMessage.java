@@ -23,4 +23,7 @@ public class ResultMessage extends ReplyMessage {
 		return null;
 	}
 
+	@Override
+	public void throwException() {}
+
 }

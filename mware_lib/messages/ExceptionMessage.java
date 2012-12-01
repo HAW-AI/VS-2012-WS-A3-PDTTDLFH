@@ -20,4 +20,12 @@ public class ExceptionMessage extends ReplyMessage {
 	@Override
 	public boolean exception() { return true; }
 
+	public void throwException() {
+		// TODO
+		// puff, peng, zuff
+	}
+
+	@Override
+	public String value() { return null; }
+
 }

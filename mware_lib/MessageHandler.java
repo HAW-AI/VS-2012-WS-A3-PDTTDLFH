@@ -9,7 +9,9 @@ public class MessageHandler {
 
 	public static void handle(String message, Communicator communicator) {
 		if (message.startsWith("request")) {
-			RequestMessage requestMessage = new RequestMessage(message);
+			// TODO add constructor which reads an existing message from string
+			// and does not create one with a new messageID
+			//RequestMessage requestMessage = new RequestMessage(message);
 		} else {
 			ReplyMessage replyMessage = null;
 

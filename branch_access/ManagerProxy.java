@@ -1,6 +1,14 @@
 package branch_access;
 
 import java.net.InetSocketAddress;
+import java.util.concurrent.Semaphore;
+
+import mware_lib.Communicator;
+import mware_lib.CommunicatorCaretaker;
+import mware_lib.MessageDB;
+import mware_lib.messages.ExceptionMessage;
+import mware_lib.messages.ReplyMessage;
+import mware_lib.messages.RequestMessage;
 
 public class ManagerProxy extends Manager{
 
@@ -14,8 +22,27 @@ public class ManagerProxy extends Manager{
 	
 	@Override
 	public String createAccount(String owner) {
-		// TODO Auto-generated method stub
-		return null;
+		RequestMessage requestMessage = new RequestMessage(name, "createAccount", owner);
+
+		Semaphore messageSemaphore = MessageDB.put(requestMessage);
+
+		CommunicatorCaretaker.getCommunicator(address).send(requestMessage);
+		try {
+			messageSemaphore.acquire();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		ReplyMessage replyMessage = MessageDB.getReplyForRequest(requestMessage);
+
+		// if this is an exception reply message we will just throw the exception here
+		if (replyMessage.exception()) {
+			replyMessage.throwException();
+		}
+
+		// unless replyMessage.throwException throws an Exception we will just
+		// return the value of the reply
+		return replyMessage.value();
 	}
 
 	@Override

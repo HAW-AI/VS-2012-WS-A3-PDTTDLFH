@@ -6,4 +6,8 @@ public abstract class ReplyMessage extends Message {
 	}
 
 	public abstract boolean exception();
+	
+	public abstract void throwException();
+	
+	public abstract String value();
 }

@@ -4,8 +4,15 @@ import mware_lib.MessageID;
 
 public class RequestMessage extends Message {
 
-	public RequestMessage(String message) {
+	private final String proxyName;
+	private final String methodName;
+	private final String parameters;
+
+	public RequestMessage(String proxyName, String methodName, String variableLengthParameters) {
 		super(MessageID.getNextMessageID());
+		this.proxyName = proxyName;
+		this.methodName = methodName;
+		this.parameters = variableLengthParameters;
 	}
 
 	@Override
