@@ -48,4 +48,8 @@ public class CommunicatorFactory extends Thread {
 			}
 		}
 	}
+	
+	public static int getDefaultPort(){
+		return DEFAULT_PORT;
+	}
 }
