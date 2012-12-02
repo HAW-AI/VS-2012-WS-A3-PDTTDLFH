@@ -62,6 +62,9 @@ public class NameServiceProxy extends NameService {
 		if (answer[0].equals("result")) {
 			System.out.println("got answer: "+Arrays.toString(answer));
 			result = ProxyCaretaker.create(answer[1], answer[2], answer[3], Integer.parseInt(answer[4]));
+		} else if (answer[0].equals("not_found")) {
+			System.out.println("got answer: "+Arrays.toString(answer));
+			throw new RuntimeException("Requested object not found");
 		} else {
 			System.out.println("received unknown msg during rebind: "+Arrays.toString(answer));
 		}
