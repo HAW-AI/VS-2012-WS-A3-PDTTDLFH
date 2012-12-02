@@ -1,20 +1,28 @@
 package mware_lib.messages;
 
+import utillity.Utility;
+
 public class ExceptionMessage extends ReplyMessage {
 
 	private final String exceptionMessageText;
+	private final String type;
 
+	public ExceptionMessage(Long messageID, String type, String message) {
+		super(messageID);
+		this.type = type;
+		this.exceptionMessageText = message;
+	}
+	
 	public ExceptionMessage(String message) {
-		// extract the MessageID from the result string
 		super(Long.parseLong(message.split(getMessageDelimeter())[1]));
-		String[] separatedMessage = message.split(getMessageDelimeter());
-
-		this.exceptionMessageText = separatedMessage[2];
+		String[] splitRequestMessage = message.split(getMessageDelimeter());
+		this.type = splitRequestMessage[2];
+		this.exceptionMessageText = splitRequestMessage[3];
 	}
 
 	@Override
 	public String toMessageFormatString() {
-		return null;
+		return Utility.concatStrWDel(getMessageDelimeter(), "exception", messageID.toString(), type, exceptionMessageText);
 	}
 
 	@Override
@@ -29,4 +37,11 @@ public class ExceptionMessage extends ReplyMessage {
 	@Override
 	public String value() { return null; }
 
+	public String getExceptionMessageText(){
+		return this.exceptionMessageText;
+	}
+	
+	public String getType(){
+		return this.type;
+	}
 }
