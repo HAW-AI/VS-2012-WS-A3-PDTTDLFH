@@ -28,16 +28,15 @@ public class NameServiceProxy extends NameService {
 	@Override
 	public void rebind(Object servant, String name) {
 		String type = Utility.getOriginType(servant);
-		System.out.println(type);
 		String host = socket.getLocalAddress().getHostAddress();
-		String port = String.valueOf(CommunicatorTemp.getPort()); //TODO
+		String port = String.valueOf(CommunicatorFactory.getDefaultPort());
 		String msg =  Utility.concatStrWDel(",", "rebind", name, type, host, port);
 		out.println(msg);
 		String result = null;
-		System.out.println("sending rebind to ns: " + msg);
+		System.out.println("do rebind: " + msg);
 		try {
 			result = in.readLine();
-			System.out.println("ns: " + result);
+			System.out.println("got answer: " + result);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -49,7 +48,7 @@ public class NameServiceProxy extends NameService {
 	@Override
 	public Object resolve(String name) {
 		Object result = new Object();
-		System.out.println("resolving: " + name);
+		System.out.println("do resolve: " + name);
 		out.println("resolve," + name);
 		String[] answer = null;
 		try {
@@ -58,7 +57,7 @@ public class NameServiceProxy extends NameService {
 			e.printStackTrace();
 		}
 		if (answer[0].equals("result")) {
-			System.out.println("answer: "+Arrays.toString(answer));
+			System.out.println("got answer: "+Arrays.toString(answer));
 			result = ProxyCaretaker.create(answer[1], answer[2], answer[3], Integer.parseInt(answer[4]));
 		} else {
 			System.out.println("received unknown msg during rebind: "+Arrays.toString(answer));
