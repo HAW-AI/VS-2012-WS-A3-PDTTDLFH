@@ -20,17 +20,20 @@ public class ManagerProxy extends Manager{
 	
 	@Override
 	public String createAccount(String owner) {
+		System.out.println("proxy creating new account");
 		RequestMessage requestMessage = new RequestMessage(name, "createAccount", owner);
 		Semaphore messageSemaphore = MessageDB.put(requestMessage);
+		System.out.println("sending creation msg");
 		CommunicatorStore.getCommunicator(address).send(requestMessage);
+		System.out.println("msg send");
 		try {
 			messageSemaphore.acquire();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-
+		System.out.println("got result");
 		ReplyMessage replyMessage = MessageDB.getReplyForRequest(requestMessage);
-
+		System.out.println("returning result");
 		// if this is an exception reply message we will just throw the exception here
 		if (replyMessage.exception()) {
 			replyMessage.throwException();

@@ -22,6 +22,7 @@ public final class Communicator extends Thread {
 		PrintWriter tmpOutput = null;
 
 		try {
+			System.out.println("Opening new socket "+socketAddress.getAddress()+" "+socketAddress.getPort());
 			tmpSocket = new Socket(socketAddress.getAddress(), socketAddress.getPort());
 			tmpInput = new BufferedReader(new InputStreamReader(tmpSocket.getInputStream()));
 			tmpOutput = new PrintWriter(tmpSocket.getOutputStream());
