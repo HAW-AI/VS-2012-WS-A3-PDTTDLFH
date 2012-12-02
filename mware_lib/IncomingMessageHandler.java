@@ -33,5 +33,4 @@ public class IncomingMessageHandler {
 			MessageDB.put(replyMessage);
 		}
 	}
-
 }
