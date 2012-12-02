@@ -22,12 +22,16 @@ public class ManagerSkeletonThread extends Thread{
 		try{
 			String result;
 			if (msg.getMethodName().equals("createAccount")) {
+				System.out.println("calling method: createAccount");
 				result = manager.createAccount(msg.getParameters());
 			} else if (msg.getMethodName().equals("getBalance")) {
+				System.out.println("calling method: getBalance");
 				result = String.valueOf(manager.getBalance(msg.getParameters()));
 			} else {
+				System.out.println("calling method: unknown");
 				throw new Exception("Invalid method call");
 			}
+			System.out.println("sending result msg");
 			communicator.send(new ResultMessage(msg.getMessageID(), result));
 		} catch (Exception e){
 			communicator.send(new ExceptionMessage(msg.getMessageID(), e.getClass().toString(), e.getMessage()));
