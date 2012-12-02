@@ -37,5 +37,15 @@ public class RequestMessage extends Message {
 				"request", messageID.toString(), proxyName, methodName, parameters);
 	}
 
-	public String getProxyName() { return proxyName; }
+	public String getProxyName() {
+		return proxyName;
+	}
+	
+	public String getMethodName() {
+		return this.methodName;
+	}
+	
+	public String getParameters() {
+		return this.parameters;
+	}
 }
