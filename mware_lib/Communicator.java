@@ -28,9 +28,26 @@ public final class Communicator extends Thread {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		socket = tmpSocket;
-		input = tmpInput;
-		output = tmpOutput;
+
+		this.socket = tmpSocket;
+		this.input = tmpInput;
+		this.output = tmpOutput;
+	}
+
+	public Communicator(Socket socket) {
+		BufferedReader tmpInput = null;
+		PrintWriter tmpOutput = null;
+
+		try {
+			tmpInput = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			tmpOutput = new PrintWriter(socket.getOutputStream());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		this.input = tmpInput;
+		this.output = tmpOutput;
+		this.socket = socket;
 	}
 
 	public void run() {
@@ -51,5 +68,9 @@ public final class Communicator extends Thread {
 
 	public void send(Message message) {
 		output.println(message.toMessageFormatString());
+	}
+
+	public InetSocketAddress inetSocketAddress() {
+		return new InetSocketAddress(socket.getInetAddress(), socket.getPort());
 	}
 }

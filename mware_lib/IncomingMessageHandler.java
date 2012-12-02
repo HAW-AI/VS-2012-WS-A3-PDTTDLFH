@@ -2,7 +2,6 @@ package mware_lib;
 
 import mware_lib.messages.ExceptionMessage;
 import mware_lib.messages.ReplyMessage;
-import mware_lib.messages.RequestMessage;
 import mware_lib.messages.ResultMessage;
 
 public class IncomingMessageHandler {
