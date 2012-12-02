@@ -1,6 +1,7 @@
 package mware_lib.messages;
 
 import utillity.Utility;
+import static java.util.regex.Pattern.quote;
 
 public class ExceptionMessage extends ReplyMessage {
 
@@ -14,8 +15,9 @@ public class ExceptionMessage extends ReplyMessage {
 	}
 	
 	public ExceptionMessage(String message) {
-		super(Long.parseLong(message.split(getMessageDelimeter())[1]));
-		String[] splitRequestMessage = message.split(getMessageDelimeter());
+		//quote for escaping delimiter to prevent problem with regex special chars
+		super(Long.parseLong(message.split(quote(getMessageDelimeter()))[1]));
+		String[] splitRequestMessage = message.split(quote(getMessageDelimeter()));
 		this.type = splitRequestMessage[2];
 		this.exceptionMessageText = splitRequestMessage[3];
 	}
