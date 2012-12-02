@@ -1,5 +1,6 @@
 package mware_lib.messages;
 
+import utillity.Utility;
 import mware_lib.MessageID;
 
 public class RequestMessage extends Message {
@@ -15,8 +16,26 @@ public class RequestMessage extends Message {
 		this.parameters = variableLengthParameters;
 	}
 
+	/*
+	 * This constructor is necessary because a request message will be received as
+	 * a string by the IcomingMessageHandler which then has to build a RequestMessage
+	 * from the string
+	 * Also important because building a Request from its string representation does
+	 * not give-out a new MessageID!!!
+	 */
+	public RequestMessage(String requestMessage) {
+		super(Long.parseLong(requestMessage.split(getMessageDelimeter())[1]));
+		String[] splitRequestMessage = requestMessage.split(getMessageDelimeter());
+		this.proxyName = splitRequestMessage[2];
+		this.methodName = splitRequestMessage[3];
+		this.parameters = splitRequestMessage[4];
+	}
+
 	@Override
 	public String toMessageFormatString() {
-		return null;
+		return Utility.concatStrWDel(getMessageDelimeter(),
+				"request", messageID.toString(), proxyName, methodName, parameters);
 	}
+
+	public String getProxyName() { return proxyName; }
 }

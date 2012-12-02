@@ -2,6 +2,7 @@ package mware_lib;
 
 import mware_lib.messages.ExceptionMessage;
 import mware_lib.messages.ReplyMessage;
+import mware_lib.messages.RequestMessage;
 import mware_lib.messages.ResultMessage;
 
 public class IncomingMessageHandler {
@@ -18,9 +19,8 @@ public class IncomingMessageHandler {
 
 	public static void handle(String message, Communicator communicator) {
 		if (message.startsWith("request")) {
-			// TODO add constructor which reads an existing message from string
-			// and does not create one with a new messageID
-			//RequestMessage requestMessage = new RequestMessage(message);
+			RequestMessage requestMessage = new RequestMessage(message);
+			SkeletonCaretaker.getSkeleton(requestMessage.getProxyName()).unmarshal(requestMessage, communicator);
 		} else {
 			ReplyMessage replyMessage = null;
 

@@ -3,7 +3,7 @@ package branch_access;
 import java.net.InetSocketAddress;
 import java.util.concurrent.Semaphore;
 
-import mware_lib.CommunicatorCaretaker;
+import mware_lib.CommunicatorStore;
 import mware_lib.MessageDB;
 import mware_lib.messages.ReplyMessage;
 import mware_lib.messages.RequestMessage;
@@ -24,7 +24,7 @@ public class ManagerProxy extends Manager{
 
 		Semaphore messageSemaphore = MessageDB.put(requestMessage);
 
-		CommunicatorCaretaker.getCommunicator(address).send(requestMessage);
+		CommunicatorStore.getCommunicator(address).send(requestMessage);
 		try {
 			messageSemaphore.acquire();
 		} catch (InterruptedException e) {
