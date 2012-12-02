@@ -25,7 +25,7 @@ public class ManagerProxy extends Manager{
 		Semaphore messageSemaphore = MessageDB.put(requestMessage);
 		System.out.println("sending creation msg");
 		CommunicatorStore.getCommunicator(address).send(requestMessage);
-		System.out.println("msg send");
+		System.out.println("msg sent");
 		try {
 			messageSemaphore.acquire();
 		} catch (InterruptedException e) {
