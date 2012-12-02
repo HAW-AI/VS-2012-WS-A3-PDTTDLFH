@@ -3,6 +3,7 @@ package cash_access;
 import java.net.InetSocketAddress;
 import java.util.concurrent.Semaphore;
 
+import mware_lib.CommunicatorStore;
 import mware_lib.MessageDB;
 import mware_lib.messages.ReplyMessage;
 import mware_lib.messages.RequestMessage;
@@ -21,6 +22,7 @@ public class AccountProxy extends Account{
 	public void deposit(double amount) {
 		RequestMessage requestMessage = new RequestMessage(name, "deposite", String.valueOf(amount));
 		Semaphore messageSemaphore = MessageDB.put(requestMessage);
+		CommunicatorStore.getCommunicator(address).send(requestMessage);
 		try {
 			messageSemaphore.acquire();
 		} catch (InterruptedException e) {
@@ -38,6 +40,7 @@ public class AccountProxy extends Account{
 	public void withdraw(double amount) throws OverdraftException {
 		RequestMessage requestMessage = new RequestMessage(name, "deposite", String.valueOf(amount));
 		Semaphore messageSemaphore = MessageDB.put(requestMessage);
+		CommunicatorStore.getCommunicator(address).send(requestMessage);
 		try {
 			messageSemaphore.acquire();
 		} catch (InterruptedException e) {
@@ -55,6 +58,7 @@ public class AccountProxy extends Account{
 	public double getBalance() {
 		RequestMessage requestMessage = new RequestMessage(name, "getBalance", "void");
 		Semaphore messageSemaphore = MessageDB.put(requestMessage);
+		CommunicatorStore.getCommunicator(address).send(requestMessage);
 		try {
 			messageSemaphore.acquire();
 		} catch (InterruptedException e) {

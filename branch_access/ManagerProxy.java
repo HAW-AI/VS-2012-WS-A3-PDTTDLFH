@@ -21,9 +21,7 @@ public class ManagerProxy extends Manager{
 	@Override
 	public String createAccount(String owner) {
 		RequestMessage requestMessage = new RequestMessage(name, "createAccount", owner);
-
 		Semaphore messageSemaphore = MessageDB.put(requestMessage);
-
 		CommunicatorStore.getCommunicator(address).send(requestMessage);
 		try {
 			messageSemaphore.acquire();
@@ -47,6 +45,7 @@ public class ManagerProxy extends Manager{
 	public double getBalance(String accountID) {
 		RequestMessage requestMessage = new RequestMessage(name, "getBalance", accountID);
 		Semaphore messageSemaphore = MessageDB.put(requestMessage);
+		CommunicatorStore.getCommunicator(address).send(requestMessage);
 		try {
 			messageSemaphore.acquire();
 		} catch (InterruptedException e) {
