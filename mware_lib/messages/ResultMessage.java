@@ -1,5 +1,6 @@
 package mware_lib.messages;
 
+import static java.util.regex.Pattern.quote;
 import utillity.Utility;
 
 public class ResultMessage extends ReplyMessage {
@@ -13,8 +14,9 @@ public class ResultMessage extends ReplyMessage {
 	
 	public ResultMessage(String message) {
 		// extract the MessageID from the result string
-		super(Long.parseLong(message.split(getMessageDelimeter())[1]));
-		this.value = message.split(getMessageDelimeter())[2];
+		//quote for escaping delimiter to prevent problem with regex special chars
+		super(Long.parseLong(message.split(quote(getMessageDelimeter()))[1]));
+		this.value = message.split(quote(getMessageDelimeter()))[2];
 	}
 
 	public String value() {
