@@ -25,6 +25,7 @@ public class RequestMessage extends Message {
 	 * not give-out a new MessageID!!!
 	 */
 	public RequestMessage(String requestMessage) {
+		//quote for escaping delimiter to prevent problem with regex special chars
 		super(Long.parseLong(requestMessage.split(quote(getMessageDelimeter()))[1]));
 		String[] splitRequestMessage = requestMessage.split(quote(getMessageDelimeter()));
 		this.remoteObjectName = splitRequestMessage[2];
