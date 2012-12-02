@@ -16,6 +16,7 @@ public class CommunicatorStore {
 		} else {
 			Communicator communicator = new Communicator(address);
 			communicator.setDaemon(true);
+			communicator.start();
 			putCommunicator(communicator);
 			return communicator;
 		}
