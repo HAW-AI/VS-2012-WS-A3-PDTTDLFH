@@ -1,10 +1,14 @@
 package mware_lib.messages;
 
-
 public class ResultMessage extends ReplyMessage {
 
 	private final String value;
 
+	public ResultMessage(Long messageID, String value) {
+		super(messageID);
+		this.value = value;
+	}
+	
 	public ResultMessage(String message) {
 		// extract the MessageID from the result string
 		super(Long.parseLong(message.split(getMessageDelimeter())[1]));
