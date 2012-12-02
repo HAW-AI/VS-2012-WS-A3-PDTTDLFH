@@ -30,7 +30,7 @@ public class NameServiceProxy extends NameService {
 		String type = Utility.getOriginType(servant);
 		System.out.println(type);
 		String host = socket.getLocalAddress().getHostAddress();
-		String port = String.valueOf(Communicator.getPort()); //TODO
+		String port = String.valueOf(CommunicatorTemp.getPort()); //TODO
 		String msg =  Utility.concatStrWDel(",", "rebind", name, type, host, port);
 		out.println(msg);
 		String result = null;
@@ -59,7 +59,7 @@ public class NameServiceProxy extends NameService {
 		}
 		if (answer[0].equals("result")) {
 			System.out.println("answer: "+Arrays.toString(answer));
-			ProxyCaretaker.create(answer[1], answer[2], answer[3], Integer.parseInt(answer[4]));
+			result = ProxyCaretaker.create(answer[1], answer[2], answer[3], Integer.parseInt(answer[4]));
 		} else {
 			System.out.println("received unknown msg during rebind: "+Arrays.toString(answer));
 		}
