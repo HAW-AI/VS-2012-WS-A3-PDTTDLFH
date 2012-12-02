@@ -38,7 +38,7 @@ public class AccountProxy extends Account{
 
 	@Override
 	public void withdraw(double amount) throws OverdraftException {
-		RequestMessage requestMessage = new RequestMessage(name, "deposite", String.valueOf(amount));
+		RequestMessage requestMessage = new RequestMessage(name, "withdraw", String.valueOf(amount));
 		Semaphore messageSemaphore = MessageDB.put(requestMessage);
 		CommunicatorStore.getCommunicator(address).send(requestMessage);
 		try {
