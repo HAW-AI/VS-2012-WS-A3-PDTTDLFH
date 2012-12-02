@@ -2,6 +2,7 @@ package mware_lib.messages;
 
 import utillity.Utility;
 import mware_lib.MessageID;
+import static java.util.regex.Pattern.quote;
 
 public class RequestMessage extends Message {
 
@@ -24,7 +25,7 @@ public class RequestMessage extends Message {
 	 * not give-out a new MessageID!!!
 	 */
 	public RequestMessage(String requestMessage) {
-		super(Long.parseLong(requestMessage.split(getMessageDelimeter())[1]));
+		super(Long.parseLong(requestMessage.split(quote(getMessageDelimeter()))[1]));
 		String[] splitRequestMessage = requestMessage.split(getMessageDelimeter());
 		this.proxyName = splitRequestMessage[2];
 		this.methodName = splitRequestMessage[3];
