@@ -20,7 +20,7 @@ public class IncomingMessageHandler {
 	public static void handle(String message, Communicator communicator) {
 		if (message.startsWith("request")) {
 			RequestMessage requestMessage = new RequestMessage(message);
-			SkeletonCaretaker.getSkeleton(requestMessage.getProxyName()).unmarshal(requestMessage, communicator);
+			SkeletonCaretaker.getSkeleton(requestMessage.getRemoteObjectName()).unmarshal(requestMessage, communicator);
 		} else {
 			ReplyMessage replyMessage = null;
 

@@ -6,13 +6,13 @@ import static java.util.regex.Pattern.quote;
 
 public class RequestMessage extends Message {
 
-	private final String proxyName;
+	private final String remoteObjectName;
 	private final String methodName;
 	private final String parameters;
 
 	public RequestMessage(String proxyName, String methodName, String variableLengthParameters) {
 		super(MessageID.getNextMessageID());
-		this.proxyName = proxyName;
+		this.remoteObjectName = proxyName;
 		this.methodName = methodName;
 		this.parameters = variableLengthParameters;
 	}
@@ -27,7 +27,7 @@ public class RequestMessage extends Message {
 	public RequestMessage(String requestMessage) {
 		super(Long.parseLong(requestMessage.split(quote(getMessageDelimeter()))[1]));
 		String[] splitRequestMessage = requestMessage.split(quote(getMessageDelimeter()));
-		this.proxyName = splitRequestMessage[2];
+		this.remoteObjectName = splitRequestMessage[2];
 		this.methodName = splitRequestMessage[3];
 		this.parameters = splitRequestMessage[4];
 	}
@@ -35,11 +35,11 @@ public class RequestMessage extends Message {
 	@Override
 	public String toMessageFormatString() {
 		return Utility.concatStrWDel(getMessageDelimeter(),
-				"request", messageID.toString(), proxyName, methodName, parameters);
+				"request", messageID.toString(), remoteObjectName, methodName, parameters);
 	}
 
-	public String getProxyName() {
-		return proxyName;
+	public String getRemoteObjectName() {
+		return remoteObjectName;
 	}
 	
 	public String getMethodName() {
