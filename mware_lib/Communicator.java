@@ -22,6 +22,7 @@ public final class Communicator extends Thread {
 		PrintWriter tmpOutput = null;
 
 		try {
+			System.out.println("Opening new socket "+socketAddress.getAddress()+" "+socketAddress.getPort());
 			tmpSocket = new Socket(socketAddress.getAddress(), socketAddress.getPort());
 			tmpInput = new BufferedReader(new InputStreamReader(tmpSocket.getInputStream()));
 			tmpOutput = new PrintWriter(tmpSocket.getOutputStream());
@@ -55,7 +56,9 @@ public final class Communicator extends Thread {
 		try {
 			// while the socket is open and new messages arrive we fectch them
 			// and pass them of to the MessageHandler
+			System.out.println("new communicator is running");
 			while (!socket.isClosed() && ((inputLine = input.readLine()) != null)) {
+				System.out.println("received msg: "+inputLine);
 				IncomingMessageHandler.handle(inputLine, this);
 			}
 			socket.close();
