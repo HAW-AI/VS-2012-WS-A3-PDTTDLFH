@@ -74,6 +74,7 @@ public class NameServiceThread extends Thread{
 			System.out.println("Request: rebind >"+name+" "+type+" "+host+" "+port);
 			nameService.addObject(name, new ObjectData(name, type, host, port));
 			out.println("ok");
+			out.flush();
 		}
 	}
 
@@ -84,10 +85,12 @@ public class NameServiceThread extends Thread{
 			ObjectData obj = this.nameService.getObject(name);
 			if (obj == null) {
 				out.println("not_found");
+				out.flush();
 			} else {
 				System.out.println("Request: resolve");
 				String msg = "result,"+obj.name()+","+obj.type()+","+obj.host()+","+obj.port();
 				out.println(msg);
+				out.flush();
 			}
 		}
 	}

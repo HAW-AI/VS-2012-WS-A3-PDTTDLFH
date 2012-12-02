@@ -33,6 +33,7 @@ public class NameServiceProxy extends NameService {
 		String port = String.valueOf(CommunicatorFactory.getDefaultPort());
 		String msg =  Utility.concatStrWDel(",", "rebind", name, type, host, port);
 		out.println(msg);
+		out.flush();
 		String result = null;
 		System.out.println("do rebind: " + msg);
 		try {
@@ -51,6 +52,7 @@ public class NameServiceProxy extends NameService {
 		Object result = new Object();
 		System.out.println("do resolve: " + name);
 		out.println("resolve," + name);
+		out.flush();
 		String[] answer = null;
 		try {
 			answer = in.readLine().split(",");
