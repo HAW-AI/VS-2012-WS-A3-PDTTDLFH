@@ -5,7 +5,17 @@ import mware_lib.messages.ReplyMessage;
 import mware_lib.messages.RequestMessage;
 import mware_lib.messages.ResultMessage;
 
-public class MessageHandler {
+public class IncomingMessageHandler {
+	/*
+	 * This class deals with INCOMING messages. Do not be confused by the
+	 * fact that it handles request messages as well as reply messages.
+	 * Conceptually there is a Communicator on the Clientside and on on the
+	 * Server side. The client sends a message which received by the server
+	 * and then handled by the server's IncomingMessageHandler which sees a
+	 * 'request' message. Once the server sends a reply to the client the
+	 * client's IncomingMessageHandler deals with the message and sees a
+	 * 'result' message.
+	 */
 
 	public static void handle(String message, Communicator communicator) {
 		if (message.startsWith("request")) {

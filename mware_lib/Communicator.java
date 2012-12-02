@@ -39,8 +39,11 @@ public final class Communicator extends Thread {
 			// while the socket is open and new messages arrive we fectch them
 			// and pass them of to the MessageHandler
 			while (!socket.isClosed() && ((inputLine = input.readLine()) != null)) {
-				MessageHandler.handle(inputLine, this);
+				IncomingMessageHandler.handle(inputLine, this);
 			}
+			socket.close();
+			input.close();
+			output.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
