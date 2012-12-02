@@ -72,6 +72,7 @@ public final class Communicator extends Thread {
 	public void send(Message message) {
 	    System.out.println("sending msg from port " + socket.getLocalPort() + " to " + socket.getInetAddress() + ":" + socket.getPort());
 		output.println(message.toMessageFormatString());
+		output.flush();
 	}
 
 	public InetSocketAddress inetSocketAddress() {
