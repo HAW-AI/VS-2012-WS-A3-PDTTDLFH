@@ -1,11 +1,7 @@
 package branch_access;
 
-import java.lang.reflect.Method;
-
-import javax.management.RuntimeErrorException;
-
 import mware_lib.Communicator;
-import mware_lib.messages.ReplyMessage;
+import mware_lib.messages.ExceptionMessage;
 import mware_lib.messages.RequestMessage;
 import mware_lib.messages.ResultMessage;
 
@@ -32,9 +28,9 @@ public class ManagerSkeletonThread extends Thread{
 			} else {
 				throw new Exception("Invalid method call");
 			}
-			communicator.send();//TODO result reply
+			communicator.send(new ResultMessage(msg.getMessageID(), result));
 		} catch (Exception e){
-			communicator.send();//TODO exception reply
+			communicator.send(new ExceptionMessage(msg.getMessageID(), e.getClass().toString(), e.getMessage()));
 		}
 	}
 }

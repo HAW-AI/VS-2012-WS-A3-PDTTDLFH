@@ -1,8 +1,9 @@
 package cash_access;
 
 import mware_lib.Communicator;
+import mware_lib.messages.ExceptionMessage;
 import mware_lib.messages.RequestMessage;
-import branch_access.Manager;
+import mware_lib.messages.ResultMessage;
 
 public class AccountSkeletonThread extends Thread{
 	private final Account account;
@@ -18,7 +19,7 @@ public class AccountSkeletonThread extends Thread{
 	@Override
 	public void run() {
 		try{
-			String result;
+			String result = "void";
 			if (msg.getMethodName().equals("deposite")) {
 				account.deposit(Double.valueOf(msg.getParameters()));
 			} else if (msg.getMethodName().equals("withdraw")) {
@@ -28,9 +29,9 @@ public class AccountSkeletonThread extends Thread{
 			} else {
 				throw new Exception("Invalid method call");
 			}
-			communicator.send();//TODO result reply
+			communicator.send(new ResultMessage(msg.getMessageID(), result));
 		} catch (Exception e){
-			communicator.send();//TODO exception reply
+			communicator.send(new ExceptionMessage(msg.getMessageID(), e.getClass().toString(), e.getMessage()));
 		}
 	}
 }
