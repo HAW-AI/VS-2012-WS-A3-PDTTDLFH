@@ -29,9 +29,17 @@ public class ExceptionMessage extends ReplyMessage {
 	public boolean exception() { return true; }
 
 	public void throwException() {
-		// TODO
-		//how do we identify an OverdraftException?
-		// puff, peng, zuff
+		Object obj=null;
+		try {
+			final Class<?>[] CONSTRUCTOR_SIGNATURE = {
+					Class.forName("java.lang.String") };
+			final Object[] CONSTRUCTOR_ARGS = { exceptionMessageText };
+				obj= Class.forName(type).getConstructor(CONSTRUCTOR_SIGNATURE).newInstance(CONSTRUCTOR_ARGS);
+		} catch (Exception e) {
+			System.out.println("An error occured while writing an exception");
+			throw new RuntimeException(exceptionMessageText);
+		}
+		throw ((RuntimeException) obj);
 	}
 
 	@Override
