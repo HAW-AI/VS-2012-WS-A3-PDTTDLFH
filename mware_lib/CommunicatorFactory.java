@@ -38,6 +38,7 @@ public class CommunicatorFactory extends Thread {
 	public void run() {
 		while(true) {
 			try {
+				System.out.println("opening bank socket: "+serverSocket.getLocalPort());
 				Socket socket = serverSocket.accept(); // blocks until new connection established.
 				Communicator communicator = new Communicator(socket);
 				communicator.setDaemon(true);
