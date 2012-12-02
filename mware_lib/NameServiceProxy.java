@@ -27,6 +27,7 @@ public class NameServiceProxy extends NameService {
 
 	@Override
 	public void rebind(Object servant, String name) {
+		CommunicatorFactory.init();
 		String type = Utility.getOriginType(servant);
 		String host = socket.getLocalAddress().getHostAddress();
 		String port = String.valueOf(CommunicatorFactory.getDefaultPort());
