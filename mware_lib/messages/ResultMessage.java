@@ -1,5 +1,7 @@
 package mware_lib.messages;
 
+import utillity.Utility;
+
 public class ResultMessage extends ReplyMessage {
 
 	private final String value;
@@ -24,7 +26,7 @@ public class ResultMessage extends ReplyMessage {
 
 	@Override
 	public String toMessageFormatString() {
-		return null;
+		return Utility.concatStrWDel(getMessageDelimeter(),	"result", messageID.toString(), value);
 	}
 
 	@Override
