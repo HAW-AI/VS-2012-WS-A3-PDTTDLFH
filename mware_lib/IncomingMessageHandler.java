@@ -28,6 +28,9 @@ public class IncomingMessageHandler {
 				replyMessage = new ResultMessage(message);
 			} else if (message.startsWith("exception")) {
 				replyMessage = new ExceptionMessage(message);
+			} else {
+				//TODO
+				System.out.println(message);
 			}
 
 			MessageDB.put(replyMessage);
