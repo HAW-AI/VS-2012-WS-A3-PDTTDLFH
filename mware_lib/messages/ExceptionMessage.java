@@ -37,11 +37,11 @@ public class ExceptionMessage extends ReplyMessage {
 					Class.forName("java.lang.String") };
 			final Object[] CONSTRUCTOR_ARGS = { exceptionMessageText };
 				obj= Class.forName(type).getConstructor(CONSTRUCTOR_SIGNATURE).newInstance(CONSTRUCTOR_ARGS);
+			throw (RuntimeException) obj; //TODO atm an error will occur. should be fixed
 		} catch (Exception e) {
 			System.out.println("An error occured while writing an exception");
 			throw new RuntimeException(exceptionMessageText);
 		}
-		throw ((RuntimeException) obj);
 	}
 
 	@Override
