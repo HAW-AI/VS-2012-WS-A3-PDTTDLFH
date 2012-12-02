@@ -22,7 +22,7 @@ public final class Communicator extends Thread {
 		PrintWriter tmpOutput = null;
 
 		try {
-			System.out.println("Opening new socket "+socketAddress.getAddress()+" "+socketAddress.getPort());
+			System.out.println("opening new socket "+socketAddress.getAddress()+" "+socketAddress.getPort());
 			tmpSocket = new Socket(socketAddress.getAddress(), socketAddress.getPort());
 			tmpInput = new BufferedReader(new InputStreamReader(tmpSocket.getInputStream()));
 			tmpOutput = new PrintWriter(tmpSocket.getOutputStream());
@@ -45,7 +45,12 @@ public final class Communicator extends Thread {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		try {
+			System.out.println("got thois"+tmpInput.readLine());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.input = tmpInput;
 		this.output = tmpOutput;
 		this.socket = socket;
@@ -54,7 +59,7 @@ public final class Communicator extends Thread {
 	public void run() {
 		String inputLine = null;
 		try {
-			// while the socket is open and new messages arrive we fectch them
+			// while the socket is open and new messages arrive we fetch them
 			// and pass them of to the MessageHandler
 			System.out.println("new communicator is running");
 			while (!socket.isClosed() && ((inputLine = input.readLine()) != null)) {
@@ -70,6 +75,7 @@ public final class Communicator extends Thread {
 	}
 
 	public void send(Message message) {
+		System.out.println("sending msg");
 		output.println(message.toMessageFormatString());
 	}
 
