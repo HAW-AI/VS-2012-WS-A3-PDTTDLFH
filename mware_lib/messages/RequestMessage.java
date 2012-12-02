@@ -26,7 +26,7 @@ public class RequestMessage extends Message {
 	 */
 	public RequestMessage(String requestMessage) {
 		super(Long.parseLong(requestMessage.split(quote(getMessageDelimeter()))[1]));
-		String[] splitRequestMessage = requestMessage.split(getMessageDelimeter());
+		String[] splitRequestMessage = requestMessage.split(quote(getMessageDelimeter()));
 		this.proxyName = splitRequestMessage[2];
 		this.methodName = splitRequestMessage[3];
 		this.parameters = splitRequestMessage[4];
