@@ -32,7 +32,7 @@ public class NameService extends Thread{
 			System.out.println("Nameservice is terminating");
 			welcomeSocket.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			e.printStackTrace();//TODO
 		}
 	}
 	

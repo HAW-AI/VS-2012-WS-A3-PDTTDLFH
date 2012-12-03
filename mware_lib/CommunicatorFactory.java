@@ -19,7 +19,7 @@ public class CommunicatorFactory extends Thread {
 		try {
 			this.serverSocket = new ServerSocket(DEFAULT_PORT);
 		} catch (IOException e) {
-			e.printStackTrace();
+			e.printStackTrace();//TODO
 		}
 	}
 
@@ -46,7 +46,7 @@ public class CommunicatorFactory extends Thread {
 				CommunicatorStore.putCommunicator(communicator);
 				communicator.start();
 			} catch (IOException e) {
-				e.printStackTrace();
+				e.printStackTrace();//TODO
 			}
 		}
 	}

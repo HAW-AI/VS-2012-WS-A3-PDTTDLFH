@@ -27,6 +27,7 @@ public class SkeletonCaretaker {
 	}
 	
 	static Skeleton getSkeleton(String name) {
+		//TODO should not return null when the skeleton is missing, its better to throw an exception to handle this case
 		return skeletons.get(name);
 	}
 }

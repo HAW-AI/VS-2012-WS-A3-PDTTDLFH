@@ -21,7 +21,7 @@ public class NameServiceProxy extends NameService {
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			out = new PrintWriter(socket.getOutputStream(), true);
 		} catch (IOException e) {
-			e.printStackTrace();
+			e.printStackTrace();//TODO
 		}	
 	}
 
@@ -57,7 +57,7 @@ public class NameServiceProxy extends NameService {
 		try {
 			answer = in.readLine().split(",");
 		} catch (IOException e) {
-			e.printStackTrace();
+			e.printStackTrace();//TODO
 		}
 		if (answer[0].equals("result")) {
 			System.out.println("got answer: "+Arrays.toString(answer));
