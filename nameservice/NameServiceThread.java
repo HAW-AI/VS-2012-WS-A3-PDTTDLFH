@@ -57,7 +57,7 @@ public class NameServiceThread extends Thread{
 				socket.close();
 			}
 		} catch (IOException e) {
-			System.out.println("Connection closed by client");
+			System.out.println("Connection closed by other side of the socket");
 		}
 	}
 	
