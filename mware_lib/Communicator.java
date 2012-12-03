@@ -65,7 +65,7 @@ public final class Communicator extends Thread {
 			input.close();
 			output.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("Connection closed by other side of the socket");
 		}
 	}
 
