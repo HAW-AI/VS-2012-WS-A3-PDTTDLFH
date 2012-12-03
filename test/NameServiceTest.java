@@ -16,7 +16,7 @@ import org.junit.Test;
 
 public class NameServiceTest {
 
-	static int port = 50001;
+	static int port = 50000;
 	static String host = "localhost";
 	static BufferedReader in;
 	static PrintWriter out;
@@ -57,29 +57,30 @@ public class NameServiceTest {
 
 	@Test
 	public void resolveRebind() throws IOException, InterruptedException {
-		out.println("rebind,testname,testtype,testhost,1");
+		out.println("rebind|testname|testtype|testhost|1");
 		msg = in.readLine();
 		System.out.println("Test result: "+msg);
-		assertTrue(msg.startsWith("ok") && !msg.isEmpty());
+		assertTrue(msg.equals("ok"));
 	}
 	
 	@Test
 	public void resolveNotFound() throws IOException, InterruptedException {
-		out.println("resolve,unknown");
+		out.println("resolve|unknown");
 		msg = in.readLine();
 		System.out.println("Test result: "+msg);
-		assertTrue(msg.startsWith("not_found") && !msg.isEmpty());
+		assertTrue(msg.equals("not_found"));
 	}
 	
 	@Test
 	public void resolveFound() throws IOException, InterruptedException {
-		out.println("rebind,testname,testtype,testhost,1");
+		String testObj = "rebind|testname|testtype|testhost|1";
+		out.println(testObj);
 		msg = in.readLine();
 		System.out.println("Test result: "+msg);
-		out.println("resolve,testname");
+		out.println("resolve|testname");
 		msg = in.readLine();
 		System.out.println("Test result: "+msg);
-		assertTrue(msg.startsWith("result") && !msg.isEmpty());
+		assertTrue(msg.substring(7).equals(testObj.substring(7)));
 	}
 }
 

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.regex.Pattern;
 
 import utillity.Utility;
 
@@ -31,7 +32,7 @@ public class NameServiceThread extends Thread{
 		String msg;
 		try {
 			while (!socket.isClosed() && ((msg = in.readLine()) != null)) {
-				String[] tokens = msg.split(",");
+				String[] tokens = msg.split(Pattern.quote("|"));
 				String action = tokens[0];
 
 				if(action.equals("rebind")){
@@ -88,7 +89,7 @@ public class NameServiceThread extends Thread{
 				out.flush();
 			} else {
 				System.out.println("Request: resolve");
-				String msg = "result,"+obj.name()+","+obj.type()+","+obj.host()+","+obj.port();
+				String msg = Utility.concatStrWDel("|","result",obj.name(),obj.type(),obj.host(),String.valueOf(obj.port()));
 				out.println(msg);
 				out.flush();
 			}

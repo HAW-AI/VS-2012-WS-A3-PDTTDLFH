@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Arrays;
+import java.util.regex.Pattern;
 
 import utillity.Utility;
 
@@ -31,7 +32,7 @@ public class NameServiceProxy extends NameService {
 		String type = Utility.getOriginType(servant);
 		String host = socket.getLocalAddress().getHostAddress();
 		String port = String.valueOf(CommunicatorFactory.getDefaultPort());
-		String msg =  Utility.concatStrWDel(",", "rebind", name, type, host, port);
+		String msg =  Utility.concatStrWDel("|", "rebind", name, type, host, port);
 		out.println(msg);
 		out.flush();
 		String result = null;
@@ -51,11 +52,11 @@ public class NameServiceProxy extends NameService {
 	public Object resolve(String name) {
 		Object result = new Object();
 		System.out.println("do resolve: " + name);
-		out.println("resolve," + name);
+		out.println(Utility.concatStrWDel("|", "resolve", name));
 		out.flush();
 		String[] answer = null;
 		try {
-			answer = in.readLine().split(",");
+			answer = in.readLine().split(Pattern.quote("|"));
 		} catch (IOException e) {
 			e.printStackTrace();//TODO
 		}
