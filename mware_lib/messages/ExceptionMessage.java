@@ -36,10 +36,10 @@ public class ExceptionMessage extends ReplyMessage {
 			final Class<?>[] CONSTRUCTOR_SIGNATURE = {
 					Class.forName("java.lang.String") };
 			final Object[] CONSTRUCTOR_ARGS = { exceptionMessageText };
-				obj= Class.forName(type).getConstructor(CONSTRUCTOR_SIGNATURE).newInstance(CONSTRUCTOR_ARGS);
-			throw (RuntimeException) obj; //TODO atm an error will occur. should be fixed
+				obj = Class.forName(type).getConstructor(CONSTRUCTOR_SIGNATURE).newInstance(CONSTRUCTOR_ARGS);
+			throw (RuntimeException) obj;
 		} catch (Exception e) {
-			System.out.println("An error occured while writing an exception");
+			System.out.println("An error occured while reflecting an exception. throwing new runtime exception");
 			throw new RuntimeException(exceptionMessageText);
 		}
 	}
