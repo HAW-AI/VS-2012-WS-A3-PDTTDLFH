@@ -38,8 +38,8 @@ public class ExceptionMessage extends ReplyMessage {
 			final Object[] CONSTRUCTOR_ARGS = { exceptionMessageText };
 				obj = Class.forName(type).getConstructor(CONSTRUCTOR_SIGNATURE).newInstance(CONSTRUCTOR_ARGS);
 		} catch (Exception e) {
-			System.out.println("An error occured while reflecting an exception. throwing new runtime exception");
-			throw new RuntimeException("An error occured while reflecting an exception. throwing new runtime exception");
+			System.out.println("An error occured while reflecting an exception");
+			throw new RuntimeException("An error occured while reflecting an exception");
 		}
 		if(obj instanceof RuntimeException){
 			throw (RuntimeException) obj;
