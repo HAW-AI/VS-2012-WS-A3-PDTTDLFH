@@ -21,13 +21,16 @@ public class SkeletonCaretaker {
 			newSkeleton = (Skeleton) Class.forName(type+"Skeleton").getConstructor(CONSTRUCTOR_SIGNATURE).newInstance(CONSTRUCTOR_ARGS);
 			skeletons.put(name, newSkeleton);
 		} catch (Exception e) {
-			 e.printStackTrace();
-			throw new RuntimeException();
+			System.out.println("An error occured while reflecting a skeleton: "+e.getMessage());
+			throw new RuntimeException("An error occured while reflecting a skeleton: "+e.getMessage());
 		}
 	}
 	
 	static Skeleton getSkeleton(String name) {
-		//TODO should not return null when the skeleton is missing, its better to throw an exception to handle this case
+		Skeleton skeleton = skeletons.get(name);
+		if(skeleton == null){
+			skeleton = new ExceptionSkeleton();
+		}
 		return skeletons.get(name);
 	}
 }
