@@ -41,7 +41,7 @@ public class ExceptionMessage extends ReplyMessage {
 			System.out.println("An error occured while reflecting an exception. throwing new runtime exception");
 			throw new RuntimeException("An error occured while reflecting an exception. throwing new runtime exception");
 		}
-		if(obj != null && obj instanceof RuntimeException){
+		if(obj instanceof RuntimeException){
 			throw (RuntimeException) obj;
 		} else {
 			throw new RuntimeException(exceptionMessageText);
