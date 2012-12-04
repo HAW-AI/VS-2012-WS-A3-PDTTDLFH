@@ -32,7 +32,8 @@ public class NameService extends Thread{
 			System.out.println("Nameservice is terminating");
 			welcomeSocket.close();
 		} catch (IOException e) {
-			e.printStackTrace();//TODO
+			System.out.println("could not listen to port: "+this.port);
+			throw new RuntimeException("Could not listen to port: "+this.port);
 		}
 	}
 	

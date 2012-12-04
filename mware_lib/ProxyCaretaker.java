@@ -11,8 +11,8 @@ public class ProxyCaretaker {
 			final Object[] CONSTRUCTOR_ARGS = {name, new InetSocketAddress(host, port)};
 			result = Class.forName(type+"Proxy").getConstructor(CONSTRUCTOR_SIGNATURE).newInstance(CONSTRUCTOR_ARGS);
 		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException();
+			System.out.println("An error occured while reflecting a proxy: "+e.getMessage());
+			throw new RuntimeException("An error occured while reflecting a proxy: "+e.getMessage());
 		}
 		return result;
 	}

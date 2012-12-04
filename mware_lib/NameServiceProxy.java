@@ -22,7 +22,8 @@ public class NameServiceProxy extends NameService {
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			out = new PrintWriter(socket.getOutputStream(), true);
 		} catch (IOException e) {
-			e.printStackTrace();//TODO
+			System.out.println("Can not listen to input/output of nameservice");
+			throw new RuntimeException("Can not listen to input/output of nameservice");
 		}	
 	}
 
@@ -58,7 +59,8 @@ public class NameServiceProxy extends NameService {
 		try {
 			answer = in.readLine().split(Pattern.quote("|"));
 		} catch (IOException e) {
-			e.printStackTrace();//TODO
+			System.out.println("could not receive an answer from nameservice: "+e.getMessage());
+			throw new RuntimeException("Could not receive an answer from nameservice: "+e.getMessage());
 		}
 		if (answer[0].equals("result")) {
 			System.out.println("got answer: "+Arrays.toString(answer));
@@ -68,6 +70,7 @@ public class NameServiceProxy extends NameService {
 			throw new RuntimeException("Requested object not found");
 		} else {
 			System.out.println("received unknown msg during rebind: "+Arrays.toString(answer));
+			throw new RuntimeException("Received unknown msg during rebind"+Arrays.toString(answer));
 		}
 		return result;
 	}

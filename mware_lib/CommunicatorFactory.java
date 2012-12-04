@@ -19,7 +19,8 @@ public class CommunicatorFactory extends Thread {
 		try {
 			this.serverSocket = new ServerSocket(DEFAULT_PORT);
 		} catch (IOException e) {
-			e.printStackTrace();//TODO
+			System.out.println("could not connect "+e.getMessage());
+			throw new RuntimeException("Could not receive an answer from nameservice: "+e.getMessage());
 		}
 	}
 
@@ -39,14 +40,15 @@ public class CommunicatorFactory extends Thread {
 		while(true) {
 			try {
 				System.out.println("opening bank socket: "+serverSocket.getLocalPort());
-				Socket socket = serverSocket.accept(); // blocks until new connection established.
+				Socket socket = serverSocket.accept();
 				System.out.println("received incomming request. starting new communicator");
 				Communicator communicator = new Communicator(socket);
 				communicator.setDaemon(true);
 				CommunicatorStore.putCommunicator(communicator);
 				communicator.start();
 			} catch (IOException e) {
-				e.printStackTrace();//TODO
+				System.out.println("an error occured while waiting for a new connection to be established");
+				throw new RuntimeException("An error occured while waiting for a new connection to be established");
 			}
 		}
 	}

@@ -9,7 +9,7 @@ public class IncomingMessageHandler {
 	/*
 	 * This class deals with INCOMING messages. Do not be confused by the
 	 * fact that it handles request messages as well as reply messages.
-	 * Conceptually there is a Communicator on the Clientside and on on the
+	 * Conceptually there is a Communicator on the Client side and on on the
 	 * Server side. The client sends a message which received by the server
 	 * and then handled by the server's IncomingMessageHandler which sees a
 	 * 'request' message. Once the server sends a reply to the client the
@@ -29,8 +29,8 @@ public class IncomingMessageHandler {
 			} else if (message.startsWith("exception")) {
 				replyMessage = new ExceptionMessage(message);
 			} else {
-				//TODO
-				System.out.println(message);
+				System.out.println("unknown msg type received: "+message);
+				throw new RuntimeException("Unknown msg type received: "+message);
 			}
 
 			MessageDB.put(replyMessage);
