@@ -20,12 +20,6 @@ public class ManagerSkeleton implements Skeleton {
 	}
 	
 	@Override
-	public void marshal(String msg) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void unmarshal(RequestMessage requestMessage, Communicator communicator) {
 		System.out.println("creating managerSkeletonThread");
 		new ManagerSkeletonThread(manager, requestMessage, communicator).start();

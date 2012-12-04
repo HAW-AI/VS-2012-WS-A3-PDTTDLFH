@@ -64,12 +64,4 @@ public class ManagerProxy extends Manager{
 		// return the value of the reply
 		return Double.valueOf(replyMessage.value());
 	}
-	
-//	public void marshal(){
-//		// TODO Auto-generated method stub
-//	}
-//	
-//	public void unmarshal(){
-//		// TODO Auto-generated method stub
-//	}
 }

@@ -14,12 +14,6 @@ public class AccountSkeleton  implements Skeleton {
 	}
 	
 	@Override
-	public void marshal(String msg) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public String getName() {
 		return name;
 	}
