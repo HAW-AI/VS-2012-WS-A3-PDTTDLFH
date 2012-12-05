@@ -31,28 +31,35 @@ public class ExceptionMessage extends ReplyMessage {
 	public boolean exception() { return true; }
 
 	public void throwException() {
-		Object obj=null;
-		try {
-			final Class<?>[] CONSTRUCTOR_SIGNATURE = {
-					Class.forName("java.lang.String") };
-			final Object[] CONSTRUCTOR_ARGS = { exceptionMessageText };
-				obj = Class.forName(type).getConstructor(CONSTRUCTOR_SIGNATURE).newInstance(CONSTRUCTOR_ARGS);
-		} catch (Exception e) {
-			System.out.println("An error occured while reflecting an exception");
-			throw new RuntimeException("An error occured while reflecting an exception");
-		}
-		if(obj instanceof RuntimeException){
-			throw (RuntimeException) obj;
+		Exception ex = getException();
+		if(ex instanceof RuntimeException){
+			throw (RuntimeException) ex;
 		} else {
 			throw new RuntimeException(exceptionMessageText);
 		}
 	}
 
 	@Override
-	public String value() { return null; }
+	public String value() {
+		return "void";
+	}
 
 	public String getExceptionMessageText(){
 		return this.exceptionMessageText;
+	}
+	
+	public Exception getException(){
+		Exception ex= new Exception();
+		try {
+			final Class<?>[] CONSTRUCTOR_SIGNATURE = {
+					Class.forName("java.lang.String") };
+			final Object[] CONSTRUCTOR_ARGS = { exceptionMessageText };
+				ex = (Exception) Class.forName(type).getConstructor(CONSTRUCTOR_SIGNATURE).newInstance(CONSTRUCTOR_ARGS);
+		} catch (Exception e) {
+			System.out.println("An error occured while reflecting an exception");
+			throw new RuntimeException("An error occured while reflecting an exception");
+		}
+		return ex;
 	}
 	
 	public String getType(){

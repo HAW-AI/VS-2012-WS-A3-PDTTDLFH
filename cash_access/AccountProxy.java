@@ -1,13 +1,8 @@
 package cash_access;
 
 import java.net.InetSocketAddress;
-import java.util.concurrent.Semaphore;
 
-import mware_lib.CommunicatorStore;
-import mware_lib.MessageDB;
-import mware_lib.messages.ExceptionMessage;
-import mware_lib.messages.ReplyMessage;
-import mware_lib.messages.RequestMessage;
+import mware_lib.MethodCaller;
 
 public class AccountProxy extends Account{
 
@@ -21,64 +16,33 @@ public class AccountProxy extends Account{
 	
 	@Override
 	public void deposit(double amount) {
-		RequestMessage requestMessage = new RequestMessage(name, "deposite", String.valueOf(amount));
-		Semaphore messageSemaphore = MessageDB.put(requestMessage);
-		CommunicatorStore.getCommunicator(address).send(requestMessage);
-		try {
-			messageSemaphore.acquire();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		ReplyMessage replyMessage = MessageDB.getReplyForRequest(requestMessage);
-		
-		// if this is an exception reply message we will just throw the exception here
-		if (replyMessage.exception()) {
-			replyMessage.throwException();
+		MethodCaller caller = new MethodCaller(address, name);
+		caller.call("deposite", String.valueOf(amount));
+		if(caller.isExeption()){
+				caller.throwException();
 		}
 	}
 
 	@Override
 	public void withdraw(double amount) throws OverdraftException {
-		RequestMessage requestMessage = new RequestMessage(name, "withdraw", String.valueOf(amount));
-		Semaphore messageSemaphore = MessageDB.put(requestMessage);
-		CommunicatorStore.getCommunicator(address).send(requestMessage);
-		try {
-			messageSemaphore.acquire();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		ReplyMessage replyMessage = MessageDB.getReplyForRequest(requestMessage);
-		
-		// if this is an exception reply message we will just throw the exception here
-		if (replyMessage.exception()) {
-			ExceptionMessage exMsg = (ExceptionMessage) replyMessage;
-			if(exMsg.getType().equals("cash_access.OverdraftException")){
-				System.out.println("got overdraft exception");
-				throw new OverdraftException(exMsg.getExceptionMessageText());
+		MethodCaller caller = new MethodCaller(address, name);
+		caller.call("withdraw", String.valueOf(amount));
+		if(caller.isExeption()){
+			if(caller.isSpecialException()){
+				throw (OverdraftException) caller.getException();
 			} else {
-				replyMessage.throwException();
+				caller.throwException();
 			}
 		}
 	}
 
 	@Override
 	public double getBalance() {
-		RequestMessage requestMessage = new RequestMessage(name, "getBalance", "void");
-		Semaphore messageSemaphore = MessageDB.put(requestMessage);
-		CommunicatorStore.getCommunicator(address).send(requestMessage);
-		try {
-			messageSemaphore.acquire();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		MethodCaller caller = new MethodCaller(address, name);
+		String result = caller.call("getBalance", "void");
+		if(caller.isExeption()){
+				caller.throwException();
 		}
-		ReplyMessage replyMessage = MessageDB.getReplyForRequest(requestMessage);
-		
-		// if this is an exception reply message we will just throw the exception here
-		if (replyMessage.exception()) {
-			replyMessage.throwException();
-		}
-		// unless replyMessage.throwException throws an Exception we will just
-		// return the value of the reply
-		return Double.valueOf(replyMessage.value());
+		return Double.valueOf(result);
 	}
 }
