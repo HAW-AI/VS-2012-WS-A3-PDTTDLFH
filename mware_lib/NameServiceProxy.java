@@ -33,13 +33,13 @@ public class NameServiceProxy extends NameService {
 		String host = socket.getLocalAddress().getHostAddress();
 		String port = String.valueOf(CommunicatorFactory.getDefaultPort());
 		String msg =  Utility.concatStrWDel("|", "rebind", name, type, host, port);
+		log("sending msg: " + msg);
 		out.println(msg);
 		out.flush();
 		String result = null;
-		log("do rebind: " + msg);
 		try {
 			result = in.readLine();
-			log("got answer: " + result);
+			log("receiving msg: " + result);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -51,8 +51,9 @@ public class NameServiceProxy extends NameService {
 	@Override
 	public Object resolve(String name) {
 		Object result = new Object();
-		log("do resolve: " + name);
-		out.println(Utility.concatStrWDel("|", "resolve", name));
+		String msg = Utility.concatStrWDel("|", "resolve", name);
+		log("sending msg: " + msg);
+		out.println(msg);
 		out.flush();
 		String[] answer = null;
 		try {
@@ -62,10 +63,10 @@ public class NameServiceProxy extends NameService {
 			throw new RuntimeException("Could not receive an answer from nameservice: "+e.getMessage());
 		}
 		if (answer[0].equals("result")) {
-			log("got answer: "+Arrays.toString(answer));
+			log("received msg: "+Arrays.toString(answer));
 			result = ProxyCaretaker.create(answer[1], answer[2], answer[3], Integer.parseInt(answer[4]));
 		} else if (answer[0].equals("not_found")) {
-			log("got answer: "+Arrays.toString(answer));
+			log("received msg: "+Arrays.toString(answer));
 			throw new RuntimeException("Requested object not found");
 		} else {
 			log("received unknown msg during rebind: "+Arrays.toString(answer));

@@ -23,10 +23,10 @@ public class ObjectBroker {
 		try {
 			socket = new Socket(serviceHost, listenPort);
 		} catch (UnknownHostException e) {
-			log("IP address of the nameservice could not be determined");
+			log("ip address of the nameservice could not be determined");
 			throw new RuntimeException("IP address of the nameservice could not be determined");
 		} catch (IOException e) {
-			log("Could not connect to nameservice");
+			log("could not connect to nameservice");
 			throw new RuntimeException("Could not connect to nameservice");
 		}
 		return new NameServiceProxy(socket);
