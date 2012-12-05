@@ -52,14 +52,14 @@ public final class Communicator extends Thread {
 	}
 
 	public void run() {
-		String inputLine = null;
+		String message = null;
 		try {
 			// while the socket is open and new messages arrive we fectch them
 			// and pass them of to the MessageHandler
 			log("new communicator is listening on " + socket.getInetAddress().getHostAddress() + ":" + socket.getLocalPort());
-			while (!socket.isClosed() && ((inputLine = input.readLine()) != null)) {
-				log("received msg: "+inputLine);
-				IncomingMessageHandler.handle(inputLine, this);
+			while (!socket.isClosed() && ((message = input.readLine()) != null)) {
+				log("received msg: "+message + " ("+socket.getInetAddress() + ":" + socket.getPort()+")");
+				IncomingMessageHandler.handle(message, this);
 			}
 			socket.close();
 			input.close();
@@ -70,7 +70,7 @@ public final class Communicator extends Thread {
 	}
 
 	public void send(Message message) {
-	    log("sending msg from port " + socket.getLocalPort() + " to " + socket.getInetAddress() + ":" + socket.getPort());
+	    log("sending msg: "+ message.toMessageFormatString() + " ("+socket.getInetAddress() + ":" + socket.getPort()+")");
 		output.println(message.toMessageFormatString());
 		output.flush();
 	}
