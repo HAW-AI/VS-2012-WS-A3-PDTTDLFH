@@ -1,6 +1,7 @@
 package cash_access;
 
 import mware_lib.Communicator;
+import mware_lib.Utility;
 import mware_lib.messages.ExceptionMessage;
 import mware_lib.messages.RequestMessage;
 import mware_lib.messages.ResultMessage;
@@ -34,4 +35,9 @@ public class AccountSkeletonThread extends Thread{
 			communicator.send(new ExceptionMessage(msg.getMessageID(), e.getClass().getName(), e.getMessage()));
 		}
 	}
+
+	private void log(String logMessage) {
+		Utility.log("AccountSkeletonThread", logMessage);
+	}
+
 }

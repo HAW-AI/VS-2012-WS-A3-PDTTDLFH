@@ -26,4 +26,7 @@ public class CommunicatorStore {
 		communicators.put(communicator.inetSocketAddress(), communicator);
 	}
 
+	private void log(String logMessage) {
+		Utility.log("CommunicatorStore", logMessage);
+	}
 }

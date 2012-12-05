@@ -22,7 +22,7 @@ public final class Communicator extends Thread {
 		PrintWriter tmpOutput = null;
 
 		try {
-			System.out.println("opening new socket "+socketAddress.getAddress()+" "+socketAddress.getPort());
+			log("opening new socket "+socketAddress.getAddress()+" "+socketAddress.getPort());
 			tmpSocket = new Socket(socketAddress.getAddress(), socketAddress.getPort());
 			tmpInput = new BufferedReader(new InputStreamReader(tmpSocket.getInputStream()));
 			tmpOutput = new PrintWriter(tmpSocket.getOutputStream());
@@ -56,26 +56,30 @@ public final class Communicator extends Thread {
 		try {
 			// while the socket is open and new messages arrive we fectch them
 			// and pass them of to the MessageHandler
-			System.out.println("new communicator is listening on " + socket.getInetAddress().getHostAddress() + ":" + socket.getLocalPort());
+			log("new communicator is listening on " + socket.getInetAddress().getHostAddress() + ":" + socket.getLocalPort());
 			while (!socket.isClosed() && ((inputLine = input.readLine()) != null)) {
-				System.out.println("received msg: "+inputLine);
+				log("received msg: "+inputLine);
 				IncomingMessageHandler.handle(inputLine, this);
 			}
 			socket.close();
 			input.close();
 			output.close();
 		} catch (IOException e) {
-			System.out.println("Connection closed by other side of the socket");
+			log("Connection closed by other side of the socket");
 		}
 	}
 
 	public void send(Message message) {
-	    System.out.println("sending msg from port " + socket.getLocalPort() + " to " + socket.getInetAddress() + ":" + socket.getPort());
+	    log("sending msg from port " + socket.getLocalPort() + " to " + socket.getInetAddress() + ":" + socket.getPort());
 		output.println(message.toMessageFormatString());
 		output.flush();
 	}
 
 	public InetSocketAddress inetSocketAddress() {
 		return new InetSocketAddress(socket.getInetAddress(), socket.getPort());
+	}
+
+	private void log(String logMessage) {
+		Utility.log("Communicator", logMessage);
 	}
 }

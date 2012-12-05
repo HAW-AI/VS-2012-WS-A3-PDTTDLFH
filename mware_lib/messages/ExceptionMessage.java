@@ -38,7 +38,7 @@ public class ExceptionMessage extends ReplyMessage {
 			final Object[] CONSTRUCTOR_ARGS = { exceptionMessageText };
 				obj = Class.forName(type).getConstructor(CONSTRUCTOR_SIGNATURE).newInstance(CONSTRUCTOR_ARGS);
 		} catch (Exception e) {
-			System.out.println("An error occured while reflecting an exception");
+			log("An error occured while reflecting an exception");
 			throw new RuntimeException("An error occured while reflecting an exception");
 		}
 		if(obj instanceof RuntimeException){
@@ -58,4 +58,9 @@ public class ExceptionMessage extends ReplyMessage {
 	public String getType(){
 		return this.type;
 	}
+
+	private void log(String logMessage) {
+		Utility.log("ExceptionMessage", logMessage);
+	}
+
 }

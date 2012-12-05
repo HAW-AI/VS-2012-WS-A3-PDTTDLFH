@@ -5,6 +5,7 @@ import java.util.concurrent.Semaphore;
 
 import mware_lib.CommunicatorStore;
 import mware_lib.MessageDB;
+import mware_lib.Utility;
 import mware_lib.messages.ReplyMessage;
 import mware_lib.messages.RequestMessage;
 
@@ -20,20 +21,20 @@ public class ManagerProxy extends Manager{
 	
 	@Override
 	public String createAccount(String owner) {
-		System.out.println("proxy creating new account");
+		log("creating new account");
 		RequestMessage requestMessage = new RequestMessage(name, "createAccount", owner);
 		Semaphore messageSemaphore = MessageDB.put(requestMessage);
-		System.out.println("sending creation msg");
+		log("sending creation msg");
 		CommunicatorStore.getCommunicator(address).send(requestMessage);
-		System.out.println("msg sent");
+		log("msg sent");
 		try {
 			messageSemaphore.acquire();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		System.out.println("got result");
+		log("got result");
 		ReplyMessage replyMessage = MessageDB.getReplyForRequest(requestMessage);
-		System.out.println("returning result");
+		log("returning result");
 		// if this is an exception reply message we will just throw the exception here
 		if (replyMessage.exception()) {
 			replyMessage.throwException();
@@ -63,5 +64,9 @@ public class ManagerProxy extends Manager{
 		// unless replyMessage.throwException throws an Exception we will just
 		// return the value of the reply
 		return Double.valueOf(replyMessage.value());
+	}
+	
+	private void log(String logMessage) {
+		Utility.log("ManagerProxy", logMessage);
 	}
 }

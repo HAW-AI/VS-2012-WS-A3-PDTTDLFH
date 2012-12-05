@@ -5,6 +5,7 @@ import java.util.concurrent.Semaphore;
 
 import mware_lib.CommunicatorStore;
 import mware_lib.MessageDB;
+import mware_lib.Utility;
 import mware_lib.messages.ExceptionMessage;
 import mware_lib.messages.ReplyMessage;
 import mware_lib.messages.RequestMessage;
@@ -53,7 +54,7 @@ public class AccountProxy extends Account{
 		if (replyMessage.exception()) {
 			ExceptionMessage exMsg = (ExceptionMessage) replyMessage;
 			if(exMsg.getType().equals("cash_access.OverdraftException")){
-				System.out.println("got overdraft exception");
+				log("got overdraft exception");
 				throw new OverdraftException(exMsg.getExceptionMessageText());
 			} else {
 				replyMessage.throwException();
@@ -80,5 +81,9 @@ public class AccountProxy extends Account{
 		// unless replyMessage.throwException throws an Exception we will just
 		// return the value of the reply
 		return Double.valueOf(replyMessage.value());
+	}
+
+	private void log(String logMessage) {
+		Utility.log("AccountProxy", logMessage);
 	}
 }

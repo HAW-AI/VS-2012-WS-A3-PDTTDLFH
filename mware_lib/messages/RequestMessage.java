@@ -50,4 +50,8 @@ public class RequestMessage extends Message {
 	public String getParameters() {
 		return this.parameters;
 	}
+
+	private void log(String logMessage) {
+		Utility.log("RequestMessage", logMessage);
+	}
 }

@@ -20,6 +20,10 @@ public class Utility {
 	    return sb.toString();                           
 	}
 	
+	public static void log(String componentName, String message) {
+		System.out.println(componentName + ": " + message);
+	}
+	
 	public static String getOriginType(Object obj) {
 		String type = "java.lang.Object";
 		Class<?> objClass = obj.getClass();

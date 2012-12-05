@@ -34,4 +34,8 @@ public class ResultMessage extends ReplyMessage {
 	@Override
 	public void throwException() {}
 
+	private void log(String logMessage) {
+		Utility.log("ResultMessage", logMessage);
+	}
+
 }
