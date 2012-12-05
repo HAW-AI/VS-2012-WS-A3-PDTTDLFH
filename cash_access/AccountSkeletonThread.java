@@ -22,12 +22,16 @@ public class AccountSkeletonThread extends Thread{
 		try{
 			String result = "void";
 			if (msg.getMethodName().equals("deposite")) {
+				log("calling method: deposite");
 				account.deposit(Double.valueOf(msg.getParameters()));
 			} else if (msg.getMethodName().equals("withdraw")) {
+				log("calling method: withdraw");
 				account.withdraw(Double.valueOf(msg.getParameters()));
 			} else if (msg.getMethodName().equals("getBalance")) {
+				log("calling method: getBalance");
 				result = String.valueOf(account.getBalance());
 			} else {
+				log("calling method: unknown");
 				throw new Exception("Invalid method call");
 			}
 			communicator.send(new ResultMessage(msg.getMessageID(), result));
@@ -35,9 +39,8 @@ public class AccountSkeletonThread extends Thread{
 			communicator.send(new ExceptionMessage(msg.getMessageID(), e.getClass().getName(), e.getMessage()));
 		}
 	}
-
+	
 	private void log(String logMessage) {
 		Utility.log("AccountSkeletonThread", logMessage);
 	}
-
 }
