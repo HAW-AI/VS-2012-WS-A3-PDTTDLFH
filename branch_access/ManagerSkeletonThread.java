@@ -31,7 +31,6 @@ public class ManagerSkeletonThread extends Thread{
 				System.out.println("calling method: unknown");
 				throw new Exception("Invalid method call");
 			}
-			System.out.println("sending result msg");
 			communicator.send(new ResultMessage(msg.getMessageID(), result));
 		} catch (Exception e){
 			communicator.send(new ExceptionMessage(msg.getMessageID(), e.getClass().getName(), e.getMessage()));
