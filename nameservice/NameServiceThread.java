@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 import mware_lib.Utility;
@@ -35,7 +36,7 @@ public class NameServiceThread extends Thread{
 			while (!socket.isClosed() && ((msg = in.readLine()) != null)) {
 				String[] tokens = msg.split(Pattern.quote("|"));
 				String action = tokens[0];
-
+				System.out.println("received msg: "+Arrays.toString(tokens));
 				if(action.equals("rebind")){
 					if (tokens.length != 5 && !Utility.isInt(tokens[4])) {
 						error("rebind: wrong number of params or invalid port");
@@ -73,8 +74,9 @@ public class NameServiceThread extends Thread{
 		} else if (port < 0 || port > 65535) {
 			error("rebind: port must be an integer and 0<=port<=65535");
 		} else {
-			System.out.println("Request: rebind >"+name+" "+type+" "+host+" "+port);
+			System.out.println("binding "+name+" "+type+" "+host+" "+port);
 			nameService.addObject(name, new ObjectData(name, type, host, port));
+			System.out.println("sending msg: ok");
 			out.println("ok");
 			out.flush();
 		}
@@ -86,11 +88,12 @@ public class NameServiceThread extends Thread{
 		} else {
 			ObjectData obj = this.nameService.getObject(name);
 			if (obj == null) {
+				System.out.println("sending msg: not_found");
 				out.println("not_found");
 				out.flush();
 			} else {
-				System.out.println("Request: resolve");
 				String msg = Utility.concatStrWDel("|","result",obj.name(),obj.type(),obj.host(),String.valueOf(obj.port()));
+				System.out.println("sending msg: "+msg);
 				out.println(msg);
 				out.flush();
 			}
@@ -99,7 +102,7 @@ public class NameServiceThread extends Thread{
 		
 	private void error(String msg) {
 		System.out.println("ERROR: " + msg);
-		out.println("exception," + msg);
+		out.println("exception|" + msg);
 	}
 }
 
