@@ -29,11 +29,15 @@ public class IncomingMessageHandler {
 			} else if (message.startsWith("exception")) {
 				replyMessage = new ExceptionMessage(message);
 			} else {
-				System.out.println("unknown msg type received: "+message);
+				log("unknown msg type received: "+message);
 				throw new RuntimeException("Unknown msg type received: "+message);
 			}
 
 			MessageDB.put(replyMessage);
 		}
+	}
+
+	private static void log(String logMessage) {
+		Utility.log("CommunicatorStore", logMessage);
 	}
 }

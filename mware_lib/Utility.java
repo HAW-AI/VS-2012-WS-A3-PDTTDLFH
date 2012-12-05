@@ -1,4 +1,4 @@
-package utillity;
+package mware_lib;
 
 public class Utility {
 	public static boolean isInt(String str) {
@@ -18,6 +18,10 @@ public class Utility {
 	        sep = delimiter;
 	    }
 	    return sb.toString();                           
+	}
+	
+	public static void log(String componentName, String message) {
+		System.out.println(componentName + ": " + message);
 	}
 	
 	public static String getOriginType(Object obj) {

@@ -3,7 +3,6 @@ package mware_lib;
 import java.util.HashMap;
 import java.util.Map;
 
-import utillity.Utility;
 
 public class SkeletonCaretaker {
 	private static Map<String, Skeleton> skeletons = new HashMap<String, Skeleton>();
@@ -21,7 +20,7 @@ public class SkeletonCaretaker {
 			newSkeleton = (Skeleton) Class.forName(type+"Skeleton").getConstructor(CONSTRUCTOR_SIGNATURE).newInstance(CONSTRUCTOR_ARGS);
 			skeletons.put(name, newSkeleton);
 		} catch (Exception e) {
-			System.out.println("An error occured while reflecting a skeleton: "+e.getMessage());
+			log("An error occured while reflecting a skeleton: "+e.getMessage());
 			throw new RuntimeException("An error occured while reflecting a skeleton: "+e.getMessage());
 		}
 	}
@@ -32,5 +31,9 @@ public class SkeletonCaretaker {
 			skeleton = new ExceptionSkeleton();
 		}
 		return skeletons.get(name);
+	}
+
+	private static void log(String logMessage) {
+		Utility.log("SkeletonCaretaker", logMessage);
 	}
 }

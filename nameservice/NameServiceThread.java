@@ -7,7 +7,8 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.regex.Pattern;
 
-import utillity.Utility;
+import mware_lib.Utility;
+
 
 public class NameServiceThread extends Thread{
 	

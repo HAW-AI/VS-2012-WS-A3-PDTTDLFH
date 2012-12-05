@@ -1,6 +1,6 @@
 package nameservice;
 
-import utillity.Utility;
+import mware_lib.Utility;
 
 public class Starter {
 	public static void main(String[] args) {

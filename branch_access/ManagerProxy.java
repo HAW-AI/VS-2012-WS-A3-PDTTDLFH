@@ -3,6 +3,7 @@ package branch_access;
 import java.net.InetSocketAddress;
 
 import mware_lib.MethodCaller;
+import mware_lib.Utility;
 
 public class ManagerProxy extends Manager{
 
@@ -32,5 +33,9 @@ public class ManagerProxy extends Manager{
 				caller.throwException();
 		}
 		return Double.valueOf(result);
+	}
+	
+	private void log(String logMessage) {
+		Utility.log("ManagerProxy", logMessage);
 	}
 }

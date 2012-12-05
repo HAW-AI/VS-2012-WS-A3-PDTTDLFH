@@ -42,4 +42,7 @@ public class MessageDB {
 		return messageDb.remove(messageID);
 	}
 
+	private static void log(String logMessage) {
+		Utility.log("CommunicatorStore", logMessage);
+	}
 }

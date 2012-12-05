@@ -8,7 +8,6 @@ import java.net.Socket;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
-import utillity.Utility;
 
 public class NameServiceProxy extends NameService {
 	
@@ -22,7 +21,7 @@ public class NameServiceProxy extends NameService {
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			out = new PrintWriter(socket.getOutputStream(), true);
 		} catch (IOException e) {
-			System.out.println("Can not listen to input/output of nameservice");
+			log("Can not listen to input/output of nameservice");
 			throw new RuntimeException("Can not listen to input/output of nameservice");
 		}	
 	}
@@ -37,10 +36,10 @@ public class NameServiceProxy extends NameService {
 		out.println(msg);
 		out.flush();
 		String result = null;
-		System.out.println("sending request msg: " + msg);
+		log("do rebind: " + msg);
 		try {
 			result = in.readLine();
-			System.out.println("received reply msg: " + result);
+			log("got answer: " + result);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -52,26 +51,30 @@ public class NameServiceProxy extends NameService {
 	@Override
 	public Object resolve(String name) {
 		Object result = new Object();
-		System.out.println("sending msg: " + Utility.concatStrWDel("|", "resolve", name));
+		log("do resolve: " + name);
 		out.println(Utility.concatStrWDel("|", "resolve", name));
 		out.flush();
 		String[] answer = null;
 		try {
 			answer = in.readLine().split(Pattern.quote("|"));
 		} catch (IOException e) {
-			System.out.println("could not receive an answer from nameservice: "+e.getMessage());
+			log("could not receive an answer from nameservice: "+e.getMessage());
 			throw new RuntimeException("Could not receive an answer from nameservice: "+e.getMessage());
 		}
 		if (answer[0].equals("result")) {
-			System.out.println("received msg: "+Arrays.toString(answer));
+			log("got answer: "+Arrays.toString(answer));
 			result = ProxyCaretaker.create(answer[1], answer[2], answer[3], Integer.parseInt(answer[4]));
 		} else if (answer[0].equals("not_found")) {
-			System.out.println("received msg: "+Arrays.toString(answer));
+			log("got answer: "+Arrays.toString(answer));
 			throw new RuntimeException("Requested object not found");
 		} else {
-			System.out.println("received unknown msg during rebind: "+Arrays.toString(answer));
+			log("received unknown msg during rebind: "+Arrays.toString(answer));
 			throw new RuntimeException("Received unknown msg during rebind"+Arrays.toString(answer));
 		}
 		return result;
+	}
+
+	private void log(String logMessage) {
+		Utility.log("NameServiceProxy", logMessage);
 	}
 }

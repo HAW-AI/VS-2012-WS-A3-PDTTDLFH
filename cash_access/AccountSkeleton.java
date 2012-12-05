@@ -1,6 +1,7 @@
 package cash_access;
 import mware_lib.Communicator;
 import mware_lib.Skeleton;
+import mware_lib.Utility;
 import mware_lib.messages.RequestMessage;
 
 public class AccountSkeleton  implements Skeleton {
@@ -21,6 +22,10 @@ public class AccountSkeleton  implements Skeleton {
 	@Override
 	public void unmarshal(RequestMessage requestMessage, Communicator communicator) {
 		new AccountSkeletonThread(account, requestMessage, communicator).start();
+	}
+
+	private void log(String logMessage) {
+		Utility.log("AccountSkeleton", logMessage);
 	}
 
 }
