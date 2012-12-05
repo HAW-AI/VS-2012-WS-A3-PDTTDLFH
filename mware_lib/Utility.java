@@ -1,4 +1,4 @@
-package utillity;
+package mware_lib;
 
 public class Utility {
 	public static boolean isInt(String str) {

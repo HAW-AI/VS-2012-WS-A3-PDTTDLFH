@@ -3,7 +3,6 @@ package mware_lib;
 import java.util.HashMap;
 import java.util.Map;
 
-import utillity.Utility;
 
 public class SkeletonCaretaker {
 	private static Map<String, Skeleton> skeletons = new HashMap<String, Skeleton>();

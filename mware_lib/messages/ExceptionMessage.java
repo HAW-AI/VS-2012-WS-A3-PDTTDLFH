@@ -1,6 +1,6 @@
 package mware_lib.messages;
 
-import utillity.Utility;
+import mware_lib.Utility;
 import static java.util.regex.Pattern.quote;
 
 public class ExceptionMessage extends ReplyMessage {

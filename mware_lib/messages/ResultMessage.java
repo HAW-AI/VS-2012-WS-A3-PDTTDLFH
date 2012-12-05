@@ -1,7 +1,7 @@
 package mware_lib.messages;
 
 import static java.util.regex.Pattern.quote;
-import utillity.Utility;
+import mware_lib.Utility;
 
 public class ResultMessage extends ReplyMessage {
 
