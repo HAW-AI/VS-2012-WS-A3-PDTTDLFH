@@ -7,11 +7,8 @@ import java.util.Map;
 public class SkeletonCaretaker {
 	private static Map<String, Skeleton> skeletons = new HashMap<String, Skeleton>();
 
-	static void addSkeleton(Skeleton skeleton) {
-		skeletons.put(skeleton.getName(), skeleton);
-	}
-	
 	public static void addSkeleton(String name, Object servant) {
+		log("creating proxy for "+name);
 		Skeleton newSkeleton = null;
 		String type = Utility.getOriginType(servant);
 		try {
