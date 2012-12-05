@@ -68,6 +68,9 @@ public class NameServiceProxy extends NameService {
 		} else if (answer[0].equals("not_found")) {
 			log("received msg: "+Arrays.toString(answer));
 			throw new RuntimeException("Requested object not found");
+		} else if(answer[0].equals("exception")){
+			log("received msg: "+Arrays.toString(answer));
+			throw new RuntimeException("Nameservice exception: "+answer[1]);
 		} else {
 			log("received unknown msg during rebind: "+Arrays.toString(answer));
 			throw new RuntimeException("Received unknown msg during rebind"+Arrays.toString(answer));
