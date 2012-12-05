@@ -58,7 +58,7 @@ public final class Communicator extends Thread {
 			// and pass them of to the MessageHandler
 			System.out.println("new communicator is listening on " + socket.getInetAddress().getHostAddress() + ":" + socket.getLocalPort());
 			while (!socket.isClosed() && ((inputLine = input.readLine()) != null)) {
-				System.out.println("received msg: "+inputLine);
+				System.out.println("received msg: "+inputLine+" (" + socket.getInetAddress() + ":" + socket.getPort()+")");
 				IncomingMessageHandler.handle(inputLine, this);
 			}
 			socket.close();
@@ -70,7 +70,7 @@ public final class Communicator extends Thread {
 	}
 
 	public void send(Message message) {
-	    System.out.println("sending msg from port " + socket.getLocalPort() + " to " + socket.getInetAddress() + ":" + socket.getPort());
+		System.out.println("sending msg "+message.toMessageFormatString()+" (" + socket.getInetAddress() + ":" + socket.getPort()+")");
 		output.println(message.toMessageFormatString());
 		output.flush();
 	}
