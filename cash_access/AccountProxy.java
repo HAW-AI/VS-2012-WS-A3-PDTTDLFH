@@ -3,7 +3,6 @@ package cash_access;
 import java.net.InetSocketAddress;
 
 import mware_lib.MethodCaller;
-import mware_lib.Utility;
 
 public class AccountProxy extends Account{
 
@@ -45,9 +44,5 @@ public class AccountProxy extends Account{
 				caller.throwException();
 		}
 		return Double.valueOf(result);
-	}
-
-	private void log(String logMessage) {
-		Utility.log("AccountProxy", logMessage);
 	}
 }

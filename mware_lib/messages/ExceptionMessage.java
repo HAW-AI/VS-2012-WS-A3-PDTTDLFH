@@ -65,9 +65,4 @@ public class ExceptionMessage extends ReplyMessage {
 	public String getType(){
 		return this.type;
 	}
-
-	private void log(String logMessage) {
-		Utility.log("ExceptionMessage", logMessage);
-	}
-
 }

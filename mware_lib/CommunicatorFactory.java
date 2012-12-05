@@ -39,9 +39,7 @@ public class CommunicatorFactory extends Thread {
 	public void run() {
 		while(true) {
 			try {
-				log("opening bank socket: "+serverSocket.getLocalPort());
 				Socket socket = serverSocket.accept();
-				log("received incomming request. starting new communicator");
 				Communicator communicator = new Communicator(socket);
 				communicator.setDaemon(true);
 				CommunicatorStore.putCommunicator(communicator);

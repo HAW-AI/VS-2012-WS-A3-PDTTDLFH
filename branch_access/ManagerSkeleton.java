@@ -2,7 +2,6 @@ package branch_access;
 
 import mware_lib.Communicator;
 import mware_lib.Skeleton;
-import mware_lib.Utility;
 import mware_lib.messages.RequestMessage;
 
 public class ManagerSkeleton implements Skeleton {
@@ -22,11 +21,6 @@ public class ManagerSkeleton implements Skeleton {
 	
 	@Override
 	public void unmarshal(RequestMessage requestMessage, Communicator communicator) {
-		log("creating managerSkeletonThread");
 		new ManagerSkeletonThread(manager, requestMessage, communicator).start();
-	}
-	
-	private void log(String logMessage) {
-		Utility.log("ManagerSkeleton", logMessage);
 	}
 }

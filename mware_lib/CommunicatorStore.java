@@ -25,8 +25,4 @@ public class CommunicatorStore {
 	public static void putCommunicator(Communicator communicator) {
 		communicators.put(communicator.inetSocketAddress(), communicator);
 	}
-
-	private void log(String logMessage) {
-		Utility.log("CommunicatorStore", logMessage);
-	}
 }
