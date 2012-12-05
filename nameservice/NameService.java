@@ -24,7 +24,7 @@ public class NameService extends Thread{
 			System.out.println("Nameservice is running");
 			while (run) {
 				Socket socket = welcomeSocket.accept();
-				System.out.println("Got request. Starting Thread");
+				System.out.println("Got connection request. Starting Thread");
 				NameServiceThread nameservice = new NameServiceThread(socket, this);
 				nameservice.setDaemon(true);
 				nameservice.start();
