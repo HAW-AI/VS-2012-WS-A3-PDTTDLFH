@@ -1,7 +1,5 @@
 package nameservice;
 
-import mware_lib.Utility;
-
 public class Starter {
 	public static void main(String[] args) {
 		if(args.length < 1 || !Utility.isInt(args[0])){

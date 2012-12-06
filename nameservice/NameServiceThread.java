@@ -8,9 +8,6 @@ import java.net.Socket;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
-import mware_lib.Utility;
-
-
 public class NameServiceThread extends Thread{
 	
 	private final Socket socket;
