@@ -16,9 +16,9 @@ Beispiel: `java -cp .:bank.jar bank/Bank localhost 1337 diebank`
 ## Filiale
 `java -cp <dir_path_to_jar>:<jar_name> filiale.Filiale <ns-host> <ns-port> [<bank-name>]`
 
-Beispiel: `java -cp <dir_path_to_jar>:<jar_name> geldautomat.Geldautomat <ns-host> <ns-port>`
+Beispiel: `java -cp .:filiale.jar filiale.Filiale localhost 1337 diebank`
 
 ## Geldautomat
-`java -cp .:geldautomat.jar geldautomat.Geldautomat localhost 1337`
+`java -cp <dir_path_to_jar>:<jar_name> geldautomat.Geldautomat <ns-host> <ns-port>`
 
 Beispiel: `java -cp .:geldautomat.jar geldautomat.Geldautomat localhost 1337`
