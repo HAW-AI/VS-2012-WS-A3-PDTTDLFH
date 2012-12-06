@@ -1,7 +1,7 @@
 # VS-2012-WS-A3-PDTTDLFH
 Verteilte Systeme - Wintersemester 1012 - Aufgabe 3
 # Kompilieren
-`javac ./**/*.java`
+`javac {branch_access,cash_access,mware_lib,nameservice}/**/*.java`
 # Ausführen
 ## Namensdienst
 `java nameservice.Starter <port>`
