@@ -1,0 +1,70 @@
+Rebind NDEA...NameServiceProxy: sending msg: rebind|NDEA|branch_access.Manager|127.0.0.1|6667
+NameServiceProxy: receiving msg: ok
+SkeletonCaretaker: creating proxy for NDEA
+Done.
+Press ENTER to exit application...
+Communicator: new communicator is listening on 127.0.0.1:6667
+Communicator: received msg: request|0|NDEA|createAccount|Joe (/127.0.0.1:46691)
+ManagerSkeletonThread: calling method: createAccount
+NameServiceProxy: sending msg: rebind|2541|cash_access.Account|127.0.0.1|6667
+NameServiceProxy: receiving msg: ok
+SkeletonCaretaker: creating proxy for 2541
+Communicator: sending msg: result|0|2541 (/127.0.0.1:46691)
+Communicator: received msg: request|1|NDEA|getBalance|2541 (/127.0.0.1:46691)
+ManagerSkeletonThread: calling method: getBalance
+Communicator: sending msg: result|1|52.0 (/127.0.0.1:46691)
+Communicator: received msg: request|2|NDEA|getBalance|x (/127.0.0.1:46691)
+ManagerSkeletonThread: calling method: getBalance
+Communicator: sending msg: exception|2|java.lang.RuntimeException|1klc4slz6 (/127.0.0.1:46691)
+Communicator: new communicator is listening on 127.0.0.1:6667
+Communicator: received msg: request|0|2541|getBalance|void (/127.0.0.1:46695)
+AccountSkeletonThread: calling method: getBalance
+Communicator: sending msg: result|0|2297.0 (/127.0.0.1:46695)
+Communicator: received msg: request|1|2541|getBalance|void (/127.0.0.1:46695)
+AccountSkeletonThread: calling method: getBalance
+Communicator: received msg: request|2|2541|deposite|1.0 (/127.0.0.1:46695)
+AccountSkeletonThread: calling method: deposite
+Communicator: sending msg: result|2|void (/127.0.0.1:46695)
+Communicator: received msg: request|3|2541|deposite|1.0 (/127.0.0.1:46695)
+AccountSkeletonThread: calling method: deposite
+Communicator: sending msg: result|3|void (/127.0.0.1:46695)
+Communicator: received msg: request|4|2541|deposite|1.0 (/127.0.0.1:46695)
+AccountSkeletonThread: calling method: deposite
+Communicator: sending msg: result|4|void (/127.0.0.1:46695)
+Communicator: received msg: request|5|2541|deposite|1.0 (/127.0.0.1:46695)
+AccountSkeletonThread: calling method: deposite
+Communicator: sending msg: result|5|void (/127.0.0.1:46695)
+Communicator: received msg: request|6|2541|deposite|1.0 (/127.0.0.1:46695)
+AccountSkeletonThread: calling method: deposite
+Communicator: sending msg: result|6|void (/127.0.0.1:46695)
+Communicator: received msg: request|7|2541|deposite|1.0 (/127.0.0.1:46695)
+AccountSkeletonThread: calling method: deposite
+Communicator: sending msg: result|7|void (/127.0.0.1:46695)
+Communicator: received msg: request|8|2541|deposite|1.0 (/127.0.0.1:46695)
+AccountSkeletonThread: calling method: deposite
+Communicator: sending msg: result|8|void (/127.0.0.1:46695)
+Communicator: received msg: request|9|2541|deposite|1.0 (/127.0.0.1:46695)
+AccountSkeletonThread: calling method: deposite
+Communicator: sending msg: result|9|void (/127.0.0.1:46695)
+Communicator: received msg: request|10|2541|deposite|1.0 (/127.0.0.1:46695)
+AccountSkeletonThread: calling method: deposite
+Communicator: sending msg: result|10|void (/127.0.0.1:46695)
+Communicator: received msg: request|11|2541|deposite|1.0 (/127.0.0.1:46695)
+AccountSkeletonThread: calling method: deposite
+Communicator: sending msg: result|11|void (/127.0.0.1:46695)
+Communicator: sending msg: result|1|2297.0 (/127.0.0.1:46695)
+Communicator: received msg: request|12|2541|deposite|-10.0 (/127.0.0.1:46695)
+AccountSkeletonThread: calling method: deposite
+Communicator: sending msg: result|12|void (/127.0.0.1:46695)
+Communicator: received msg: request|13|2541|withdraw|-10.0 (/127.0.0.1:46695)
+AccountSkeletonThread: calling method: withdraw
+Communicator: sending msg: result|13|void (/127.0.0.1:46695)
+Communicator: received msg: request|14|2541|deposite|10.0 (/127.0.0.1:46695)
+AccountSkeletonThread: calling method: deposite
+Communicator: sending msg: exception|14|java.lang.RuntimeException|dpE-2419 (/127.0.0.1:46695)
+Communicator: received msg: request|15|2541|withdraw|0.0 (/127.0.0.1:46695)
+AccountSkeletonThread: calling method: withdraw
+Communicator: sending msg: exception|15|java.lang.RuntimeException|wdE-2419 (/127.0.0.1:46695)
+Communicator: received msg: request|16|2541|withdraw|10.0 (/127.0.0.1:46695)
+AccountSkeletonThread: calling method: withdraw
+Communicator: sending msg: exception|16|cash_access.OverdraftException|ovdE-2419 (/127.0.0.1:46695)

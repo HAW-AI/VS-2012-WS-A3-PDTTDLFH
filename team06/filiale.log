@@ -1,0 +1,15 @@
+NameServiceProxy: sending msg: resolve|NDEA
+NameServiceProxy: received msg: [result, NDEA, branch_access.Manager, 127.0.0.1, 6667]
+ProxyCaretaker: creating proxy for NDEA : branch_access.Manager 127.0.0.1 6667
+Bank resolved.
+Communicator: opening new socket /127.0.0.1 6667
+Communicator: sending msg: request|0|NDEA|createAccount|Joe (/127.0.0.1:6667)
+Communicator: new communicator is listening on 127.0.0.1:46691
+Communicator: received msg: result|0|2541 (/127.0.0.1:6667)
+Account created 2541
+Communicator: sending msg: request|1|NDEA|getBalance|2541 (/127.0.0.1:6667)
+Communicator: received msg: result|1|52.0 (/127.0.0.1:6667)
+Magic key is 52.0
+Communicator: sending msg: request|2|NDEA|getBalance|x (/127.0.0.1:6667)
+Communicator: received msg: exception|2|java.lang.RuntimeException|1klc4slz6 (/127.0.0.1:6667)
+class java.lang.RuntimeException 1klc4slz6

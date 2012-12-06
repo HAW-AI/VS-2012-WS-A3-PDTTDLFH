@@ -1,0 +1,50 @@
+NameServiceProxy: sending msg: resolve|2541
+NameServiceProxy: received msg: [result, 2541, cash_access.Account, 127.0.0.1, 6667]
+ProxyCaretaker: creating proxy for 2541 : cash_access.Account 127.0.0.1 6667
+Account resolved.
+Communicator: opening new socket /127.0.0.1 6667
+Communicator: new communicator is listening on 127.0.0.1:46695
+Communicator: sending msg: request|0|2541|getBalance|void (/127.0.0.1:6667)
+Communicator: received msg: result|0|2297.0 (/127.0.0.1:6667)
+bal:2297.0
+bal...
+depo...
+Communicator: sending msg: request|1|2541|getBalance|void (/127.0.0.1:6667)
+Communicator: sending msg: request|2|2541|deposite|1.0 (/127.0.0.1:6667)
+Communicator: received msg: result|2|void (/127.0.0.1:6667)
+Communicator: sending msg: request|3|2541|deposite|1.0 (/127.0.0.1:6667)
+Communicator: received msg: result|3|void (/127.0.0.1:6667)
+Communicator: sending msg: request|4|2541|deposite|1.0 (/127.0.0.1:6667)
+Communicator: received msg: result|4|void (/127.0.0.1:6667)
+Communicator: sending msg: request|5|2541|deposite|1.0 (/127.0.0.1:6667)
+Communicator: received msg: result|5|void (/127.0.0.1:6667)
+Communicator: sending msg: request|6|2541|deposite|1.0 (/127.0.0.1:6667)
+Communicator: received msg: result|6|void (/127.0.0.1:6667)
+Communicator: sending msg: request|7|2541|deposite|1.0 (/127.0.0.1:6667)
+Communicator: received msg: result|7|void (/127.0.0.1:6667)
+Communicator: sending msg: request|8|2541|deposite|1.0 (/127.0.0.1:6667)
+Communicator: received msg: result|8|void (/127.0.0.1:6667)
+Communicator: sending msg: request|9|2541|deposite|1.0 (/127.0.0.1:6667)
+Communicator: received msg: result|9|void (/127.0.0.1:6667)
+Communicator: sending msg: request|10|2541|deposite|1.0 (/127.0.0.1:6667)
+Communicator: received msg: result|10|void (/127.0.0.1:6667)
+Communicator: sending msg: request|11|2541|deposite|1.0 (/127.0.0.1:6667)
+Communicator: received msg: result|11|void (/127.0.0.1:6667)
+...depo
+Communicator: received msg: result|1|2297.0 (/127.0.0.1:6667)
+...bal
+Communicator: sending msg: request|12|2541|deposite|-10.0 (/127.0.0.1:6667)
+Communicator: received msg: result|12|void (/127.0.0.1:6667)
+neg numbers check 1 ok
+Communicator: sending msg: request|13|2541|withdraw|-10.0 (/127.0.0.1:6667)
+Communicator: received msg: result|13|void (/127.0.0.1:6667)
+neg numbers check 2 ok
+Communicator: sending msg: request|14|2541|deposite|10.0 (/127.0.0.1:6667)
+Communicator: received msg: exception|14|java.lang.RuntimeException|dpE-2419 (/127.0.0.1:6667)
+'dpE-2419' class java.lang.RuntimeException
+Communicator: sending msg: request|15|2541|withdraw|0.0 (/127.0.0.1:6667)
+Communicator: received msg: exception|15|java.lang.RuntimeException|wdE-2419 (/127.0.0.1:6667)
+'wdE-2419' class java.lang.RuntimeException
+Communicator: sending msg: request|16|2541|withdraw|10.0 (/127.0.0.1:6667)
+Communicator: received msg: exception|16|cash_access.OverdraftException|ovdE-2419 (/127.0.0.1:6667)
+'ovdE-2419' class cash_access.OverdraftException
